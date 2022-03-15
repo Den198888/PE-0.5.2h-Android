@@ -25,6 +25,9 @@ using StringTools;
 
 class MainMenuState extends MusicBeatState
 {
+
+    var canTween:Bool = true; //omg i steak codes btw CODE FROM SONIC.EXE 2.0
+    
 	public static var psychEngineVersion:String = '0.5.2h'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
 
@@ -46,6 +49,8 @@ class MainMenuState extends MusicBeatState
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
+	
+	var menuBG:FlxSprite;
 
 	override function create()
 	{
