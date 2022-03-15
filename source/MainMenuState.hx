@@ -77,6 +77,7 @@ class MainMenuState extends MusicBeatState
 		bg.updateHitbox();
 		bg.screenCenter();
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		(?Graphic:Null<menuBG>, ScrollX:Float = 2, ScrollY:Float = 2, RepeatX:Bool = true, RepeatY:Bool = true, SpaceX:Int = 0, SpaceY:Int = 0)
 		add(bg);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
