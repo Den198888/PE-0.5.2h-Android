@@ -49,8 +49,7 @@ class MainMenuState extends MusicBeatState
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
-	
-	var menuBG:FlxSprite;
+	var bgMC:FlxSprite;
 
 	override function create()
 	{
@@ -98,6 +97,14 @@ class MainMenuState extends MusicBeatState
 		magenta.antialiasing = ClientPrefs.globalAntialiasing;
 		magenta.color = 0xFFfd719b;
 		add(magenta);
+		
+		bgMC = new FlxSprite(-80).loadGraphic(Paths.image('menuMC'));
+		bgMC.scrollFactor.set(0, yScroll);
+		bgMC.setGraphicSize(Std.int(bgMC.width * 1.175));
+		bgMC.updateHitbox();
+		bgMC.screenCenter();
+		bgMC.antialiasing = ClientPrefs.globalAntialiasing;
+		add(bgMC);
 		
 		// magenta.scrollFactor.set();
 
@@ -270,10 +277,10 @@ class MainMenuState extends MusicBeatState
 		if (canTween)
 		{
 			canTween = false;
-			FlxTween.tween(menuBG, {x: menuBG.x + 60}, 1, {
+			FlxTween.tween(bgMC, {x: bgMC.x + 60}, 1, {
 				onComplete: function(twn:FlxTween)
 				{
-					menuBG.x = 0;
+					bgMC.x = 0;
 					canTween = true;
 				}
 			});
