@@ -268,7 +268,7 @@ class MainMenuState extends MusicBeatState
 			FlxTween.tween(menuBG, {x: menuBG.x + 60}, 1, {
 				onComplete: function(twn:FlxTween)
 				{
-					spikeUp.x = 0;
+					menuBG.x = 0;
 					canTween = true;
 				}
 			});
