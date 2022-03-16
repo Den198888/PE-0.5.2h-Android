@@ -25,6 +25,7 @@ using StringTools;
 
 class MainMenuState extends MusicBeatState
 {
+   var _repeatX:Bool = false;
 
     var canTween:Bool = true; //omg i steak codes btw CODE FROM SONIC.EXE 2.0
     
@@ -282,6 +283,7 @@ class MainMenuState extends MusicBeatState
 				{
 					bgMC.x = 0;
 					canTween = true;
+					RepeatX:Bool = true;
 				}
 			});
          }
