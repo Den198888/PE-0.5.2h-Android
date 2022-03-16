@@ -100,7 +100,6 @@ class MainMenuState extends MusicBeatState
 		add(magenta);
 		
 		bgMC = new FlxSprite(-80).loadGraphic(Paths.image('menuMC'));
-		bgMC.scrollFactor.set(0, yScroll);
 		bgMC.setGraphicSize(Std.int(bgMC.width * 1.175));
 		bgMC.updateHitbox();
 		bgMC.screenCenter();
@@ -233,7 +232,7 @@ class MainMenuState extends MusicBeatState
 						if (curSelected != spr.ID)
 						{
 							FlxTween.tween(spr, {alpha: 0}, 0.4, {
-								ease: FlxEase.quadOut,
+								ease: FlxEase.expoOut,
 								onComplete: function(twn:FlxTween)
 								{
 									spr.kill();
@@ -243,6 +242,7 @@ class MainMenuState extends MusicBeatState
 						else
 						{
 							FlxFlicker.flicker(spr, 1, 0.06, false, false, function(flick:FlxFlicker)
+							FlxTween.tween(FlxG.camera, {zoom: 1.1}, 2, {ease: FlxEase.expoOut});
 							{
 								var daChoice:String = optionShit[curSelected];
 
@@ -283,7 +283,6 @@ class MainMenuState extends MusicBeatState
 				{
 					bgMC.x = 0;
 					canTween = true;
-					RepeatX:Bool = true;
 				}
 			});
          }
