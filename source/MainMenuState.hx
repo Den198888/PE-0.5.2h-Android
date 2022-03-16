@@ -25,7 +25,6 @@ using StringTools;
 
 class MainMenuState extends MusicBeatState
 {
-   var _repeatX:Bool = false;
 
     var canTween:Bool = true; //omg i steak codes btw CODE FROM SONIC.EXE 2.0
     
@@ -242,7 +241,6 @@ class MainMenuState extends MusicBeatState
 						else
 						{
 							FlxFlicker.flicker(spr, 1, 0.06, false, false, function(flick:FlxFlicker)
-							FlxTween.tween(FlxG.camera, {zoom: 1.1}, 2, {ease: FlxEase.expoOut});
 							{
 								var daChoice:String = optionShit[curSelected];
 
