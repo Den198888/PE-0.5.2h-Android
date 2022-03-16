@@ -4517,7 +4517,7 @@ class PlayState extends MusicBeatState
 							unlock = true;
 						}
 					case 'you_know':
-						if(Paths.formatToSongPath(SONG.song) == 'fourth-wall' && !usedPractice && Achievements.fourthWallPlay >= 5) {
+						if(Paths.formatToSongPath(SONG.song) == 'fourth-wall' && !usedPractice && ratingPercent  > 0.8) {
 							unlock = true;
 						}
 				}
