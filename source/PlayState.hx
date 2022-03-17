@@ -40,6 +40,7 @@ import flixel.util.FlxTimer;
 import haxe.Json;
 import lime.utils.Assets;
 import openfl.Lib;
+import openfl.display.BitmapData;
 import openfl.display.BlendMode;
 import openfl.display.StageQuality;
 import openfl.filters.BitmapFilter;
@@ -47,6 +48,7 @@ import openfl.filters.ShaderFilter;
 import openfl.utils.Assets as OpenFlAssets;
 import editors.ChartingState;
 import editors.CharacterEditorState;
+import openfl.geom.Matrix;
 import flixel.group.FlxSpriteGroup;
 import flixel.input.keyboard.FlxKey;
 import Note.EventNote;
@@ -932,8 +934,7 @@ class PlayState extends MusicBeatState
 
 		// startCountdown();
 		
-		var songName:String = Paths.formatToSongPath(SONG.song);
-		if (songName == 'fourth-wall')
+		if(Paths.formatToSongPath(SONG.song) == 'fourth-wall')
 		{
 			if (FlxG.save.data.vfx)
 			{
