@@ -3189,7 +3189,7 @@ class PlayState extends MusicBeatState
 		} else {
 			var achieve:String = checkForAchievement(['week1_nomiss', 'week2_nomiss', 'week3_nomiss', 'week4_nomiss',
 				'week5_nomiss', 'week6_nomiss', 'week7_nomiss', 'ur_bad',
-				'ur_good', 'hype', 'two_keys', 'toastie', 'debugger']);
+				'ur_good', 'hype', 'two_keys', 'toastie', 'debugger', 'you_know']);
 
 			if(achieve != null) {
 				startAchievement(achieve);
@@ -4517,7 +4517,7 @@ class PlayState extends MusicBeatState
 							unlock = true;
 						}
 					case 'you_know':
-						if(Paths.formatToSongPath(SONG.song) == 'fourth-wall' && !usedPractice && ratingPercent  > 0.8) {
+						if(Paths.formatToSongPath(SONG.song) == 'fourth-wall' && !usedPractice) {
 							unlock = true;
 						}
 				}

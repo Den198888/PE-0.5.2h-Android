@@ -62,6 +62,7 @@ class TitleState extends MusicBeatState
 	var credTextShit:Alphabet;
 	var textGroup:FlxGroup;
 	var ngSpr:FlxSprite;
+	var bfSpr:FlxSprite;
 
 	var curWacky:Array<String> = [];
 
@@ -368,13 +369,21 @@ class TitleState extends MusicBeatState
 
 		credTextShit.visible = false;
 
-		ngSpr = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('newgrounds_logo'));
+		ngSpr = new FlxSprite(-30, FlxG.height * 0.52).loadGraphic(Paths.image('newgrounds_logo'));
 		add(ngSpr);
 		ngSpr.visible = false;
 		ngSpr.setGraphicSize(Std.int(ngSpr.width * 0.8));
 		ngSpr.updateHitbox();
 		ngSpr.screenCenter(X);
 		ngSpr.antialiasing = ClientPrefs.globalAntialiasing;
+		
+		bfSpr = new FlxSprite(50, FlxG.height * 0.52).loadGraphic(Paths.image('BF_logo'));
+		add(bfSpr);
+		bfSpr.visible = false;
+		bfSpr.setGraphicSize(Std.int(bfSpr.width * 0.8));
+		bfSpr.updateHitbox();
+		bfSpr.screenCenter(X);
+		bfSpr.antialiasing = ClientPrefs.globalAntialiasing;
 
 		FlxTween.tween(credTextShit, {y: credTextShit.y + 20}, 2.9, {ease: FlxEase.quadInOut, type: PINGPONG});
 
@@ -580,12 +589,17 @@ class TitleState extends MusicBeatState
 				case 1:
 					#if PSYCH_WATERMARKS
 					createCoolText(['Psych Engine by'], 15);
+					createCoolText(['Psych Engine Ported by'], 15);
 					#else
 					createCoolText(['ninjamuffin99', 'phantomArcade', 'kawaisprite', 'evilsk8er']);
 					#end
 				// credTextShit.visible = true;
+				case 2:
+				    addMoreText('Added this by Fazzz!', 15); //be happy always saw
 				case 3:
 					#if PSYCH_WATERMARKS
+					addMoreText('M.A Saw', 15); //ported by saw Psych Engine Port by
+					addMoreText('Psych Team', 15);
 					addMoreText('Shadow Mario', 15);
 					addMoreText('RiverOaken', 15);
 					addMoreText('shubs', 15);
@@ -602,16 +616,20 @@ class TitleState extends MusicBeatState
 				case 5:
 					#if PSYCH_WATERMARKS
 					createCoolText(['Not associated', 'with'], -40);
+					createCoolText(['idk', 'with what?'], -40);
 					#else
 					createCoolText(['In association', 'with'], -40);
 					#end
 				case 7:
 					addMoreText('newgrounds', -40);
+					addMoreText('oldgrounds', -40);
 					ngSpr.visible = true;
+					bfSpr.visible = true;
 				// credTextShit.text += '\nNewgrounds';
 				case 8:
 					deleteCoolText();
 					ngSpr.visible = false;
+					bfSpr.visible = false;
 				// credTextShit.visible = false;
 
 				// credTextShit.text = 'Shoutouts Tom Fulp';
@@ -635,8 +653,12 @@ class TitleState extends MusicBeatState
 				// credTextShit.text += '\nNight';
 				case 15:
 					addMoreText('Funkin'); // credTextShit.text += '\nFunkin';
-
 				case 16:
+				    addMoreText('Port'); //because saw ported it so why not to put these things
+				case 18:
+				    addMoreText('Scott Cawthon is the best'); // yayaya idk i want this to be in here
+
+				case 20:
 					skipIntro();
 			}
 		}
@@ -668,6 +690,7 @@ class TitleState extends MusicBeatState
 					
 					default: //Go back to normal ugly ass boring GF
 						remove(ngSpr);
+						remove(bfSpr);
 						remove(credGroup);
 						FlxG.camera.flash(FlxColor.WHITE, 2);
 						skippedIntro = true;
@@ -684,6 +707,7 @@ class TitleState extends MusicBeatState
 					new FlxTimer().start(3.2, function(tmr:FlxTimer)
 					{
 						remove(ngSpr);
+						remove(bfSpr);
 						remove(credGroup);
 						FlxG.camera.flash(FlxColor.WHITE, 0.6);
 						transitioning = false;
@@ -692,6 +716,7 @@ class TitleState extends MusicBeatState
 				else
 				{
 					remove(ngSpr);
+					remove(bfSpr);
 					remove(credGroup);
 					FlxG.camera.flash(FlxColor.WHITE, 3);
 					sound.onComplete = function() {
@@ -705,6 +730,7 @@ class TitleState extends MusicBeatState
 			else //Default! Edit this one!!
 			{
 				remove(ngSpr);
+				remove(bfSpr);
 				remove(credGroup);
 				FlxG.camera.flash(FlxColor.WHITE, 4);
 
