@@ -26,11 +26,13 @@ class Achievements {
 		["Hyperactive",					"Finish a Song without going Idle.",				'hype',					false],
 		["Just the Two of Us",			"Finish a Song pressing only two keys.",			'two_keys',				false],
 		["Toaster Gamer",				"Have you tried to run the game on a toaster?",		'toastie',				false],
-		["Debugger",					"Beat the \"Test\" Stage from the Chart Editor.",	'debugger',				 true]
+		["Debugger",					"Beat the \"Test\" Stage from the Chart Editor.",	'debugger',				 true],
+		["You know, your the best!",					"Beat Animdude and \"Fourth-Wall\" for the first time.",	'you_know',				 false]
 	];
 	public static var achievementsMap:Map<String, Bool> = new Map<String, Bool>();
 
 	public static var henchmenDeath:Int = 0;
+	public static var fourthWallPlay:Int = 0;
 	public static function unlockAchievement(name:String):Void {
 		FlxG.log.add('Completed achievement "' + name +'"');
 		achievementsMap.set(name, true);
@@ -68,6 +70,9 @@ class Achievements {
 			if(henchmenDeath == 0 && FlxG.save.data.henchmenDeath != null) {
 				henchmenDeath = FlxG.save.data.henchmenDeath;
 			}
+			if(fourthWallPlay == 0 && FlxG.save.data.fourthWallPlay != null) {
+				fourthWallPlay = FlxG.save.data.fourthWallPlay;
+            }
 		}
 
 		// You might be asking "Why didn't you just fucking load it directly dumbass??"
@@ -76,6 +81,8 @@ class Achievements {
 		// with no misses instead of just Psychic once the full release is out. So, for not having the rest of your achievements lost on
 		// the full release, we only save the achievements' tag names instead. This also makes me able to rename
 		// achievements later as long as the tag names aren't changed of course.
+		
+		// just a sec why the heck i thought the tags has been removed lol
 
 		// Edit: Oh yeah, just thought that this also makes me able to change the achievements orders easier later if i want to.
 		// So yeah, if you didn't thought about that i'm smarter than you, i think
