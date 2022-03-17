@@ -43,6 +43,7 @@ import openfl.Lib;
 import openfl.display.BlendMode;
 import openfl.display.StageQuality;
 import openfl.filters.BitmapFilter;
+import openfl.filters.ShaderFilter;
 import openfl.utils.Assets as OpenFlAssets;
 import editors.ChartingState;
 import editors.CharacterEditorState;
@@ -930,6 +931,39 @@ class PlayState extends MusicBeatState
 		playerStrums = new FlxTypedGroup<StrumNote>();
 
 		// startCountdown();
+		
+		var songName:String = Paths.formatToSongPath(SONG.song);
+		if (songName == 'fourth-wall')
+		{
+			if (FlxG.save.data.vfx)
+			{
+				var vcr:VCRDistortionShader;
+				vcr = new VCRDistortionShader();
+
+				var daStatic:FlxSprite = new FlxSprite(0, 0);
+
+				daStatic.frames = Paths.getSparrowAtlas('daSTAT');
+
+				daStatic.setGraphicSize(FlxG.width, FlxG.height);
+
+				daStatic.alpha = 0.05;
+
+				daStatic.screenCenter();
+
+				daStatic.cameras = [camHUD];
+
+				daStatic.animation.addByPrefix('static', 'staticFLASH', 24, true);
+
+				add(daStatic);
+
+				daStatic.animation.play('static');
+
+				camGame.setFilters([new ShaderFilter(vcr)]);
+
+				camHUD.setFilters([new ShaderFilter(vcr)]);
+			}
+
+        }
 
 		generateSong(SONG.song);
 		#if LUA_ALLOWED
