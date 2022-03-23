@@ -1347,7 +1347,18 @@ class PlayState extends MusicBeatState
 			}
 		}
 		
-		public function addShaderToCamera(cam:String, effect:ShaderEffect)
+		if(doPush)
+		{
+			for (lua in luaArray)
+			{
+				if(lua.scriptName == luaFile) return;
+			}
+			luaArray.push(new FunkinLua(luaFile));
+		}
+		#end
+	}
+	
+	public function addShaderToCamera(cam:String, effect:ShaderEffect)
 	{ // STOLE FROM ANDROMEDA
 
 		switch (cam.toLowerCase())
@@ -1441,17 +1452,6 @@ class PlayState extends MusicBeatState
 				var newCamEffects:Array<BitmapFilter> = [];
 				camGame.setFilters(newCamEffects);
 		}
-	}
-		
-		if(doPush)
-		{
-			for (lua in luaArray)
-			{
-				if(lua.scriptName == luaFile) return;
-			}
-			luaArray.push(new FunkinLua(luaFile));
-		}
-		#end
 	}
 	
 	function startCharacterPos(char:Character, ?gfCheck:Bool = false) {
