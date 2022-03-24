@@ -4386,7 +4386,7 @@ class PlayState extends MusicBeatState
 				boyfriend.alpha = 0;
 				healthBarBG.visible = false;
 				healthBar.visible = false;
-				botPlayTxt.visible = false;
+				botplayTxt.visible = false;
 				iconP1.visible = false;
 				iconP2.visible = false;
 				scoreTxt.visible = false;
@@ -4408,7 +4408,7 @@ class PlayState extends MusicBeatState
 				});
 				gf.visible = true;
 				boyfriend.alpha = 1;
-				botPlayTxt.visible = true;
+				botplayTxt.visible = true;
 				healthBarBG.visible = true;
 				healthBar.visible = true;
 				iconP1.visible = true;
