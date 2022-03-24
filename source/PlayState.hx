@@ -2748,7 +2748,7 @@ class PlayState extends MusicBeatState
 			}
 	    )
 	
-	    if (!daNote.mustPress && daNote.wasGoodHit);
+	    if(!daNote.mustPress && daNote.wasGoodHit);
 		{
 			if (tailscircle == 'circling' && dad.curCharacter == 'TDoll')
 			{
