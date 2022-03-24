@@ -4360,6 +4360,8 @@ class PlayState extends MusicBeatState
 		{
 			if (curStep == 64)
 				tailscircle = 'hovering';
+			if (curStep == 128)
+			    ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
 			if (curStep == 128 || curStep == 319 || curStep == 866)
 				tailscircle = 'circling';
 			if (curStep == 256 || curStep == 575) // this is to return tails to it's original positions (me very smart B))
@@ -4380,14 +4382,11 @@ class PlayState extends MusicBeatState
 					if (!FlxG.save.data.midscroll)
 						spr.x -= 275;
 				});
-				popup = false;
 				gf.visible = false;
 				boyfriend.alpha = 0;
-				bgspec.visible = false;
-				kadeEngineWatermark.visible = false;
 				healthBarBG.visible = false;
 				healthBar.visible = false;
-				botPlayState.visible = false;
+				botPlayTxt.visible = false;
 				iconP1.visible = false;
 				iconP2.visible = false;
 				scoreTxt.visible = false;
@@ -4395,10 +4394,6 @@ class PlayState extends MusicBeatState
 				remove(dad);
 				dad = new Character(-150, 330, 'TDollAlt');
 				add(dad);
-				cpuStrums.forEach(function(spr:FlxSprite)
-				{
-					spr.alpha = 0;
-				});
 				playerStrums.forEach(function(spr:FlxSprite)
 				{
 					spr.alpha = 0;
@@ -4411,12 +4406,9 @@ class PlayState extends MusicBeatState
 					if (!FlxG.save.data.midscroll)
 						spr.x += 275;
 				});
-				popup = true;
 				gf.visible = true;
 				boyfriend.alpha = 1;
-				bgspec.visible = true;
-				kadeEngineWatermark.visible = true;
-				botPlayState.visible = true;
+				botPlayTxt.visible = true;
 				healthBarBG.visible = true;
 				healthBar.visible = true;
 				iconP1.visible = true;
@@ -4427,11 +4419,6 @@ class PlayState extends MusicBeatState
 				add(dad);
 				ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
 				tailscircle = '';
-				cpuStrums.forEach(function(spr:FlxSprite)
-				{
-					if (!FlxG.save.data.midscroll)
-						spr.alpha = 1;
-				});
 				playerStrums.forEach(function(spr:FlxSprite)
 				{
 					spr.alpha = 1;
