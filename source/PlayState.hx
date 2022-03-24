@@ -2747,11 +2747,12 @@ class PlayState extends MusicBeatState
 				}
 			}
 	    )
-	    if (!daNote.mustPress && daNote.wasGoodHit)
-				{
-					if (tailscircle == 'circling' && dad.curCharacter == 'TDoll')
-					{
-						add(ezTrail);
+	
+	    if (!daNote.mustPress && daNote.wasGoodHit);
+		{
+			if (tailscircle == 'circling' && dad.curCharacter == 'TDoll')
+			{
+				add(ezTrail);
 				}
 			});
 		}
