@@ -2746,8 +2746,8 @@ class PlayState extends MusicBeatState
 					daNote.destroy();
 				}
 			}
-	    }
-	          if (!daNote.mustPress && daNote.wasGoodHit)
+	    )
+	    if (!daNote.mustPress && daNote.wasGoodHit)
 				{
 					if (tailscircle == 'circling' && dad.curCharacter == 'TDoll')
 					{
