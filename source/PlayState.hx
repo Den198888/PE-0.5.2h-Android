@@ -2690,10 +2690,7 @@ class PlayState extends MusicBeatState
 
 				if (!daNote.mustPress && daNote.wasGoodHit && !daNote.hitByOpponent && !daNote.ignoreNote)
 				{
-				 if (tailscircle == 'circling' && dad.curCharacter == 'TDoll') {
-				    add(ezTrail);
 					opponentNoteHit(daNote);
-					
 				}
 
 				if(daNote.mustPress && cpuControlled) {
@@ -2748,7 +2745,7 @@ class PlayState extends MusicBeatState
 					notes.remove(daNote, true);
 					daNote.destroy();
 				}
-			}
+			});
 	    }
 		checkEventNote();
 		
