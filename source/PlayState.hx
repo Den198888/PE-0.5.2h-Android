@@ -2806,6 +2806,7 @@ class PlayState extends MusicBeatState
 		#end
 	}
 
+    }
 	public var isDead:Bool = false; //Don't mess with this on Lua!!!
 	function doDeathCheck(?skipHealthCheck:Bool = false) {
 		if (((skipHealthCheck && instakillOnMiss) || health <= 0) && !practiceMode && !isDead)
