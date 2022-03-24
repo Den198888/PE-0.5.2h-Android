@@ -2730,6 +2730,30 @@ class PlayState extends MusicBeatState
 						}
 					}
 				}
+				
+				if (!daNote.mustPress && daNote.wasGoodHit)
+				{
+					if (tailscircle == 'circling' && dad.curCharacter == 'TDoll')
+					{
+						add(ezTrail);
+					}
+
+					if (curSong == 'sunshine' && curStep > 588 && curStep < 860 && !daNote.isSustainNote)
+					{
+						playerStrums.forEach(function(spr:FlxSprite)
+						{
+							spr.alpha = 0.7;
+							if (spr.alpha != 0)
+							{
+								new FlxTimer().start(0.01, function(trol:FlxTimer)
+								{
+									spr.alpha -= 0.03;
+									if (spr.alpha != 0)
+										trol.reset();
+								});
+							}
+						});
+					}
 
 				// Kill extremely late notes and cause misses
 				if (Conductor.songPosition > noteKillOffset + daNote.strumTime)
@@ -4362,6 +4386,7 @@ class PlayState extends MusicBeatState
 				tailscircle = 'hovering';
 			if (curStep == 128)
 			    ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
+			    insert(members.indexOf(dadGroup) - 1, ezTrail);
 			if (curStep == 128 || curStep == 319 || curStep == 866)
 				tailscircle = 'circling';
 			if (curStep == 256 || curStep == 575) // this is to return tails to it's original positions (me very smart B))
@@ -4418,6 +4443,7 @@ class PlayState extends MusicBeatState
 				dad = new Character(-150, 330, 'TDoll');
 				add(dad);
 				ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
+				insert(members.indexOf(dadGroup) - 1, ezTrail);
 				tailscircle = '';
 				playerStrums.forEach(function(spr:FlxSprite)
 				{
