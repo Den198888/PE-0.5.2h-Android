@@ -2687,13 +2687,6 @@ class PlayState extends MusicBeatState
 						daNote.y += 27.5 * ((SONG.bpm / 100) - 1) * (songSpeed - 1);
 					}
 				}
-				
-				if (!daNote.mustPress && daNote.wasGoodHit)
-				{
-					if (tailscircle == 'circling' && dad.curCharacter == 'TDoll')
-					{
-						add(ezTrail);
-				}
 
 				if (!daNote.mustPress && daNote.wasGoodHit && !daNote.hitByOpponent && !daNote.ignoreNote)
 				{
@@ -2754,6 +2747,14 @@ class PlayState extends MusicBeatState
 				}
 			}
 	    }
+	          if (!daNote.mustPress && daNote.wasGoodHit)
+				{
+					if (tailscircle == 'circling' && dad.curCharacter == 'TDoll')
+					{
+						add(ezTrail);
+				}
+			});
+		}
 		checkEventNote();
 		
 		#if debug
