@@ -4397,7 +4397,6 @@ class PlayState extends MusicBeatState
 				tailscircle = 'hovering';
 			if (curStep == 128)
 			    ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
-			    insert(members.indexOf(dadGroup) - 1, ezTrail);
 			if (curStep == 128 || curStep == 319 || curStep == 866)
 				tailscircle = 'circling';
 			if (curStep == 256 || curStep == 575) // this is to return tails to it's original positions (me very smart B))
@@ -4425,6 +4424,7 @@ class PlayState extends MusicBeatState
 				botplayTxt.visible = false;
 				iconP1.visible = false;
 				iconP2.visible = false;
+				remove(ezTrail);
 				scoreTxt.visible = false;
 
 				playerStrums.forEach(function(spr:FlxSprite)
@@ -4448,7 +4448,6 @@ class PlayState extends MusicBeatState
 				iconP2.visible = true;
 				scoreTxt.visible = true;
 				ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
-				insert(members.indexOf(dadGroup) - 1, ezTrail);
 				tailscircle = '';
 				playerStrums.forEach(function(spr:FlxSprite)
 				{
