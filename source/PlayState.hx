@@ -2503,7 +2503,14 @@ class PlayState extends MusicBeatState
 
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
 		// FlxG.watch.addQuick('VOLRight', vocals.amplitudeRight);
-
+		
+		if (dad.curCharacter == "TDoll") // Do you really wanna see sonic.exe fly? Me neither. (vorgy wrote: ye, hope to see this in 3.0)
+		{
+			if (tailscircle == 'hovering' || tailscircle == 'circling')
+				dad.y += Math.sin(floaty) * 1.3;
+			if (tailscircle == 'circling')
+				dad.x += Math.cos(floaty) * 1.3; // math B) not an actual msth lol u can use calculator B)
+		}
 		var mult:Float = FlxMath.lerp(1, iconP1.scale.x, CoolUtil.boundTo(1 - (elapsed * 9), 0, 1));
 		iconP1.scale.set(mult, mult);
 		iconP1.updateHitbox();
@@ -4153,6 +4160,28 @@ class PlayState extends MusicBeatState
 				note.destroy();
 			}
 		}
+	}
+	
+	if (camLocked)
+			{
+				if (!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection) // This suprisingly works :shrug:
+				{
+					var offsetX = 0;
+					var offsetY = 0;
+					
+					switch (dad.curCharacter) // porting shit sunshine if i can
+					{
+						case 'TDoll' | 'TDollAlt':
+							camFollow.y = dad.getMidpoint().y - 200;
+							camFollow.x = dad.getMidpoint().x + 130;
+					}
+
+					if (cameramove && tailscircle == '') // i rlly don't like how the camera moves while a character is flying.
+					{
+						camFollow.y += camY;
+						camFollow.x += camX;
+					}
+			}
 	}
 
 	function spawnNoteSplashOnNote(note:Note) {
