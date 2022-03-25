@@ -4162,25 +4162,17 @@ class PlayState extends MusicBeatState
 		}
 	}
 	
-	}
-	if(camLocked)
-			{
-				if (!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection) // This suprisingly works :shrug:
-				{
-					var offsetX = 0;
-					var offsetY = 0;
-					
-					switch (dad.curCharacter) // porting shit sunshine if i can
-					{
-						case 'TDoll' | 'TDollAlt':
-							camFollow.y = dad.getMidpoint().y - 200;
-							camFollow.x = dad.getMidpoint().x + 130;
-					}
+	switch (dad.curCharacter) // porting shit sunshine if i can
+		{
+			case 'TDoll' | 'TDollAlt':
+			camFollow.y = dad.getMidpoint().y - 200;
+			camFollow.x = dad.getMidpoint().x + 130;
+		}
 
-					if (cameramove && tailscircle == '') // i rlly don't like how the camera moves while a character is flying.
-					{
-						camFollow.y += camY;
-						camFollow.x += camX;
+		if (cameramove && tailscircle == '') // i rlly don't like how the camera moves while a character is flying.
+			{
+			camFollow.y += camY;
+			camFollow.x += camX;
 					}
 			}
 	}
