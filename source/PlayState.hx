@@ -238,6 +238,8 @@ class PlayState extends MusicBeatState
 	var floaty:Float = 0;
 	var tailscircle:String = '';
 	var ezTrail:FlxTrail;
+	var camX:Int = 0;
+	var camY:Int = 0;
 
 	public static var campaignScore:Int = 0;
 	public static var campaignMisses:Int = 0;
