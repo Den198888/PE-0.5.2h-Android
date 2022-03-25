@@ -4162,6 +4162,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 	
+	}
 	if (camLocked)
 			{
 				if (!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection) // This suprisingly works :shrug:
