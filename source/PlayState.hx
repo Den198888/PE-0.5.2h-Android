@@ -4162,6 +4162,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 	
+	}
 	switch (dad.curCharacter) // porting shit sunshine if i can
 		{
 			case 'TDoll' | 'TDollAlt':
