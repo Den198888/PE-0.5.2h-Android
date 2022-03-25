@@ -4418,9 +4418,6 @@ class PlayState extends MusicBeatState
 				iconP2.visible = false;
 				scoreTxt.visible = false;
 
-				remove(dad);
-				dad = new Character(-150, 330, 'TDollAlt');
-				add(dad);
 				playerStrums.forEach(function(spr:FlxSprite)
 				{
 					spr.alpha = 0;
@@ -4441,9 +4438,6 @@ class PlayState extends MusicBeatState
 				iconP1.visible = true;
 				iconP2.visible = true;
 				scoreTxt.visible = true;
-				remove(dad);
-				dad = new Character(-150, 330, 'TDoll');
-				add(dad);
 				ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
 				insert(members.indexOf(dadGroup) - 1, ezTrail);
 				tailscircle = '';
@@ -4542,6 +4536,15 @@ class PlayState extends MusicBeatState
 		if (curBeat % dad.danceEveryNumBeats == 0 && dad.animation.curAnim != null && !dad.animation.curAnim.name.startsWith('sing') && !dad.stunned)
 		{
 			dad.dance();
+		}
+		// Dad doesnt interupt his own notes
+		if (SONG.notes[Math.floor(curStep / 16)].mustHitSection && dad.curCharacter != 'gf')
+			{
+				if (tailscircle == 'circling' && dad.curCharacter == 'TDoll')
+					remove(ezTrail);
+				dad.dance();
+				camX = 0;
+				camY = 0;
 		}
 
 		switch (curStage)
