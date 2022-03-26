@@ -2751,7 +2751,7 @@ class PlayState extends MusicBeatState
 
 					if (curSong == 'sunshine' && curStep > 588 && curStep < 860 && !daNote.isSustainNote)
 					{
-						playerStrums.forEach //(function(spr:FlxSprite)
+						playerStrums.forEach(function(spr:FlxSprite)
 						{
 							spr.alpha = 0.7;
 							if (spr.alpha != 0)
@@ -4470,7 +4470,7 @@ class PlayState extends MusicBeatState
 					if (!FlxG.save.data.middlescroll)
 						spr.alpha = 1;
 				});
-				playerStrums.forEach //(function(spr:FlxSprite)
+				playerStrums.forEach(function(spr:FlxSprite)
 				{
 					spr.alpha = 1;
 				});
