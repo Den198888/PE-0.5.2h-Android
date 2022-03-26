@@ -236,7 +236,7 @@ class PlayState extends MusicBeatState
 	var timeTxt:FlxText;
 	var scoreTxtTween:FlxTween;
 	var floaty:Float = 0;
-	//var tailscircle:String = '';
+	var tailscircle:String = '';
 	var ezTrail:FlxTrail;
 	var camX:Int = 0;
 	var camY:Int = 0;
@@ -1232,28 +1232,6 @@ class PlayState extends MusicBeatState
 		} else if(ClientPrefs.pauseMusic != 'None') {
 			CoolUtil.precacheMusic(Paths.formatToSongPath(ClientPrefs.pauseMusic));
 		}
-		
-		function startCountdown():Void
-	{
-		FlxG.log.add(storyPlaylist);
-
-		ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
-
-		SONG.noteStyle = ChartingState.defaultnoteStyle;
-
-		var theThing = curSong.toLowerCase();
-		var doesitTween:Bool = false;
-
-		inCutscene = false;
-
-		switch (curSong) // null obj refrence so don't fuck with this
-		{
-			case "sunshine":
-
-			default:
-				generateStaticArrows(0, doesitTween);
-				generateStaticArrows(1, doesitTween);
-		}
 
 		#if desktop
 		// Updating Discord Rich Presence.
@@ -1300,9 +1278,8 @@ class PlayState extends MusicBeatState
 		songSpeed = value;
 		noteKillOffset = 350 / songSpeed;
 		return value;
-	    }
+    }
 	
-	}
 	public function addTextToDebug(text:String) {
 		#if LUA_ALLOWED
 		luaDebugGroup.forEachAlive(function(spr:DebugLuaText) {
@@ -2526,14 +2503,7 @@ class PlayState extends MusicBeatState
 
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
 		// FlxG.watch.addQuick('VOLRight', vocals.amplitudeRight);
-		
-		if (dad.curCharacter == "TDoll") // Do you really wanna see sonic.exe fly? Me neither. (vorgy wrote: ye, hope to see this in 3.0)
-		{
-			if (tailscircle == 'hovering' || tailscircle == 'circling')
-				dad.y += Math.sin(floaty) * 1.3;
-			if (tailscircle == 'circling')
-				dad.x += Math.cos(floaty) * 1.3; // math B) not an actual msth lol u can use calculator B)
-		}
+	
 		var mult:Float = FlxMath.lerp(1, iconP1.scale.x, CoolUtil.boundTo(1 - (elapsed * 9), 0, 1));
 		iconP1.scale.set(mult, mult);
 		iconP1.updateHitbox();
@@ -2765,7 +2735,7 @@ class PlayState extends MusicBeatState
 				
 				if (!daNote.mustPress && daNote.wasGoodHit)
 				{
-					if (tailscircle == 'circling' && dad.curCharacter == 'TDoll')
+					if (tailscircle == '' && dad.curCharacter == 'TDoll')
 					{
 						add(ezTrail);
 					}
@@ -4564,7 +4534,7 @@ class PlayState extends MusicBeatState
 		// Dad doesnt interupt his own notes
 		if (SONG.notes[Math.floor(curStep / 16)].mustHitSection && dad.curCharacter != 'gf')
 			{
-				if (tailscircle == 'circling' && dad.curCharacter == 'TDoll')
+				if (tailscircle == '' && dad.curCharacter == 'TDoll')
 					remove(ezTrail);
 				dad.dance();
 				camX = 0;
