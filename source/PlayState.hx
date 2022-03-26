@@ -236,7 +236,7 @@ class PlayState extends MusicBeatState
 	var timeTxt:FlxText;
 	var scoreTxtTween:FlxTween;
 	var floaty:Float = 0;
-	var tailscircle:String = '';
+	//var tailscircle:String = '';
 	var ezTrail:FlxTrail;
 	var camX:Int = 0;
 	var camY:Int = 0;
@@ -1231,6 +1231,28 @@ class PlayState extends MusicBeatState
 			CoolUtil.precacheMusic(PauseSubState.songName);
 		} else if(ClientPrefs.pauseMusic != 'None') {
 			CoolUtil.precacheMusic(Paths.formatToSongPath(ClientPrefs.pauseMusic));
+		}
+		
+		function startCountdown():Void
+	{
+		FlxG.log.add(storyPlaylist);
+
+		ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
+
+		SONG.noteStyle = ChartingState.defaultnoteStyle;
+
+		var theThing = curSong.toLowerCase();
+		var doesitTween:Bool = false;
+
+		inCutscene = false;
+
+		switch (curSong) // null obj refrence so don't fuck with this
+		{
+			case "sunshine":
+
+			default:
+				generateStaticArrows(0, doesitTween);
+				generateStaticArrows(1, doesitTween);
 		}
 
 		#if desktop
@@ -4393,20 +4415,18 @@ class PlayState extends MusicBeatState
 		
 		if (curSong == 'sunshine')
 		{
-			if (curStep == 64)
-				tailscircle = 'hovering';
 			if (curStep == 128)
 			    ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
-			if (curStep == 128 || curStep == 319 || curStep == 866)
-				tailscircle = 'circling';
+			if (curStep == 860)
+			    ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
+			if (curStep == 1120)
+			    remove(ezTrail);
 			if (curStep == 256 || curStep == 575) // this is to return tails to it's original positions (me very smart B))
 			{
 				FlxTween.tween(dad, {x: -150, y: 330}, 0.2, {
 					onComplete: function(twn:FlxTween)
 					{
 						dad.setPosition(-150, 330);
-						tailscircle = 'hovering';
-						floaty = 41.82;
 					}
 				});
 			}
@@ -4417,7 +4437,6 @@ class PlayState extends MusicBeatState
 					if (!FlxG.save.data.midscroll)
 						spr.x -= 275;
 				});
-				gf.visible = false;
 				boyfriend.alpha = 0;
 				healthBarBG.visible = false;
 				healthBar.visible = false;
@@ -4439,7 +4458,6 @@ class PlayState extends MusicBeatState
 					if (!FlxG.save.data.midscroll)
 						spr.x += 275;
 				});
-				gf.visible = true;
 				boyfriend.alpha = 1;
 				botplayTxt.visible = true;
 				healthBarBG.visible = true;
@@ -4448,7 +4466,6 @@ class PlayState extends MusicBeatState
 				iconP2.visible = true;
 				scoreTxt.visible = true;
 				ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
-				tailscircle = '';
 				playerStrums.forEach(function(spr:FlxSprite)
 				{
 					spr.alpha = 1;
@@ -4460,8 +4477,6 @@ class PlayState extends MusicBeatState
 					onComplete: function(twn:FlxTween)
 					{
 						dad.setPosition(-150, 330);
-						tailscircle = '';
-						remove(ezTrail);
 					}
 				});
 			}
