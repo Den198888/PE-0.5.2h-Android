@@ -2500,10 +2500,19 @@ class PlayState extends MusicBeatState
 		{
 			//openChartEditor();
 		}
+		
+		floaty += 0.03;
 
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
 		// FlxG.watch.addQuick('VOLRight', vocals.amplitudeRight);
-	
+		
+		if (dad.curCharacter == "TDoll" || dad.curCharacter == "pico") // Do you really wanna see sonic.exe fly? Me neither.
+		{
+			if (tailscircle == 'hovering' || tailscircle == 'circling')
+				dad.y += Math.sin(floaty) * 1.3;
+			if (tailscircle == 'circling')
+				dad.x += Math.cos(floaty) * 1.3; // math B)
+		}
 		var mult:Float = FlxMath.lerp(1, iconP1.scale.x, CoolUtil.boundTo(1 - (elapsed * 9), 0, 1));
 		iconP1.scale.set(mult, mult);
 		iconP1.updateHitbox();
@@ -2735,14 +2744,14 @@ class PlayState extends MusicBeatState
 				
 				if (!daNote.mustPress && daNote.wasGoodHit)
 				{
-					if (tailscircle == '' && dad.curCharacter == 'TDoll')
+					if (tailscircle == 'circling' && dad.curCharacter == 'TDoll')
 					{
 						add(ezTrail);
 					}
 
 					if (curSong == 'sunshine' && curStep > 588 && curStep < 860 && !daNote.isSustainNote)
 					{
-						playerStrums.forEach(function(spr:FlxSprite)
+						playerStrums.forEach //(function(spr:FlxSprite)
 						{
 							spr.alpha = 0.7;
 							if (spr.alpha != 0)
@@ -4386,10 +4395,14 @@ class PlayState extends MusicBeatState
 		
 		if (curSong == 'sunshine')
 		{
+		    if (curStep == 64)
+				tailscircle = 'hovering'; //why the funk you dont STOP omfg
+			if (curStep == 128 || curStep == 319 || curStep == 866)
+				tailscircle = 'circling';
 			if (curStep == 128)
 			    ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
 			if (curStep == 860)
-			    ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
+			    ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04); //FREAK ADD PLS IDK WHY YOU DONT ADD THIS
 			if (curStep == 1120)
 			    remove(ezTrail);
 			if (curStep == 256 || curStep == 575) // this is to return tails to it's original positions (me very smart B))
@@ -4403,9 +4416,13 @@ class PlayState extends MusicBeatState
 			}
 			if (curStep == 588) // kill me 588
 			{
+			    opponentStrums.forEach(function(spr:FlxSprite)
+				{
+					spr.alpha = 0;
+				});
 				playerStrums.forEach(function(spr:FlxSprite)
 				{
-					if (!FlxG.save.data.midscroll)
+					if (!FlxG.save.data.middlescroll)
 						spr.x -= 275;
 				});
 				boyfriend.alpha = 0;
@@ -4414,9 +4431,14 @@ class PlayState extends MusicBeatState
 				botplayTxt.visible = false;
 				iconP1.visible = false;
 				iconP2.visible = false;
-				remove(ezTrail);
 				scoreTxt.visible = false;
+				remove(ezTrail); //remove it you dum dum idk why u dont remove things
+				remove(dad);
 
+                dad = new Character(-150, 330, 'TDollAlt');
+		        startCharacterPos(dad, true);
+		        dadGroup.add(dad);
+		        add(dad);
 				playerStrums.forEach(function(spr:FlxSprite)
 				{
 					spr.alpha = 0;
@@ -4426,7 +4448,7 @@ class PlayState extends MusicBeatState
 			{
 				playerStrums.forEach(function(spr:FlxSprite)
 				{
-					if (!FlxG.save.data.midscroll)
+					if (!FlxG.save.data.middlescroll)
 						spr.x += 275;
 				});
 				boyfriend.alpha = 1;
@@ -4437,7 +4459,18 @@ class PlayState extends MusicBeatState
 				iconP2.visible = true;
 				scoreTxt.visible = true;
 				ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
-				playerStrums.forEach(function(spr:FlxSprite)
+				remove(dad);
+
+                dad = new Character(-150, 330, 'TDoll');
+		        startCharacterPos(dad, true);
+		        dadGroup.add(dad);
+		        add(dad);
+		        opponentStrums.forEach(function(spr:FlxSprite)
+				{
+					if (!FlxG.save.data.middlescroll)
+						spr.alpha = 1;
+				});
+				playerStrums.forEach //(function(spr:FlxSprite)
 				{
 					spr.alpha = 1;
 				});
@@ -4448,6 +4481,7 @@ class PlayState extends MusicBeatState
 					onComplete: function(twn:FlxTween)
 					{
 						dad.setPosition(-150, 330);
+						remove(ezTrail);
 					}
 				});
 			}
@@ -4534,7 +4568,7 @@ class PlayState extends MusicBeatState
 		// Dad doesnt interupt his own notes
 		if (SONG.notes[Math.floor(curStep / 16)].mustHitSection && dad.curCharacter != 'gf')
 			{
-				if (tailscircle == '' && dad.curCharacter == 'TDoll')
+				if (tailscircle == 'circling' && dad.curCharacter == 'TDoll')
 					remove(ezTrail);
 				dad.dance();
 				camX = 0;
