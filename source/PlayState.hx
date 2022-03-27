@@ -4395,14 +4395,18 @@ class PlayState extends MusicBeatState
 		
 		if (curSong == 'sunshine')
 		{
+		    if (curStep == 1)
+		        tailscircle = ' ';
 		    if (curStep == 64)
 				tailscircle = 'hovering'; //why the funk you dont STOP omfg
 			if (curStep == 128 || curStep == 319 || curStep == 866)
 				tailscircle = 'circling';
 			if (curStep == 128)
 			    ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
+			    add(ezTrail);
 			if (curStep == 860)
 			    ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04); //FREAK ADD PLS IDK WHY YOU DONT ADD THIS
+                add(ezTrail);
 			if (curStep == 1120)
 			    remove(ezTrail);
 			if (curStep == 256 || curStep == 575) // this is to return tails to it's original positions (me very smart B))
@@ -4434,6 +4438,10 @@ class PlayState extends MusicBeatState
 				scoreTxt.visible = false;
 				remove(ezTrail); //remove it you dum dum idk why u dont remove things
 				remove(dad);
+				remove(char2);
+				remove(char);
+				remove(player2);
+				dadGroup.remove(dad);
 
                 dad = new Character(-150, 330, 'TDollAlt');
 		        startCharacterPos(dad, true);
@@ -4459,7 +4467,12 @@ class PlayState extends MusicBeatState
 				iconP2.visible = true;
 				scoreTxt.visible = true;
 				ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
+				add(ezTrail);
 				remove(dad);
+				remove(char2);
+				remove(char);
+				remove(player2);
+				dadGroup.remove(dad);
 
                 dad = new Character(-150, 330, 'TDoll');
 		        startCharacterPos(dad, true);
