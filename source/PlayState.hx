@@ -4438,9 +4438,6 @@ class PlayState extends MusicBeatState
 				scoreTxt.visible = false;
 				remove(ezTrail); //remove it you dum dum idk why u dont remove things
 				remove(dad);
-				remove(char2);
-				remove(char);
-				remove(player2);
 				dadGroup.remove(dad);
 
                 dad = new Character(-150, 330, 'TDollAlt');
@@ -4469,9 +4466,6 @@ class PlayState extends MusicBeatState
 				ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
 				add(ezTrail);
 				remove(dad);
-				remove(char2);
-				remove(char);
-				remove(player2);
 				dadGroup.remove(dad);
 
                 dad = new Character(-150, 330, 'TDoll');
