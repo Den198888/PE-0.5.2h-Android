@@ -461,7 +461,7 @@ class PlayState extends MusicBeatState
 					emitter.width = 4787.45;
 					emitter.alpha.set(1, 1);
 					emitter.lifespan.set(2, 2.5);
-					emitter.loadParticles(Paths.image('mods/Scott Cawthon(Afton Week)/images/scott/ember1'), 500, 16, true);
+					emitter.loadParticles(Paths.image('ember1'), 500, 16, true);
 						
 					emitter.start(false, FlxG.random.float(0.3, 0.4), 100000);
 					add(emitter);
@@ -478,7 +478,7 @@ class PlayState extends MusicBeatState
 					emitter2.width = 4787.45;
 					emitter2.alpha.set(1, 1);
 					emitter2.lifespan.set(2, 2.5);
-					emitter2.loadParticles(Paths.image('mods/Scott Cawthon(Afton Week)/images/scott/ember2'), 500, 16, true);
+					emitter2.loadParticles(Paths.image('ember2'), 500, 16, true);
 						
 					emitter2.start(false, FlxG.random.float(0.4, 0.5), 100000);
 					add(emitter2);

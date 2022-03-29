@@ -50,7 +50,7 @@ class MainMenuState extends MusicBeatState
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
-	var bgMC:FlxBackdrop;
+	var wall:FlxBackdrop;
 	//var bgMC:FlxSprite;
 
 	override function create()
@@ -100,12 +100,11 @@ class MainMenuState extends MusicBeatState
 		magenta.color = 0xFFfd719b;
 		add(magenta);
 		
-		bgMC = new FlxBackdrop(Paths.image('bgMC'), 5, 1, true, true);
-		bgMC.setGraphicSize(Std.int(bgMC.width * 1.564));
-		bgMC.updateHitbox();
-		bgMC.screenCenter();
-		bgMC.antialiasing = ClientPrefs.globalAntialiasing;
-		add(bgMC);
+		wall = new FlxBackdrop(Paths.image('UI_Wall_Background'), 5, 1, true, true);
+		wall.setPosition(0, 750);
+		wall.updateHitbox();
+		wall.antialiasing = ClientPrefs.globalAntialiasing;
+		add(wall);
 
 		
 		// magenta.scrollFactor.set();
@@ -192,7 +191,7 @@ class MainMenuState extends MusicBeatState
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
 		}
 		
-		bgMC.x = FlxMath.lerp(bgMC.x, bgMC.x - 10, CoolUtil.boundTo(elapsed * 9, 0, 1));
+		wall.x = FlxMath.lerp(wall.x, wall.x - 10, CoolUtil.boundTo(elapsed * 9, 0, 1));
 
 		var lerpVal:Float = CoolUtil.boundTo(elapsed * 7.5, 0, 1);
 		camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
