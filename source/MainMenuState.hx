@@ -50,7 +50,9 @@ class MainMenuState extends MusicBeatState
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
-	var wall:FlxBackdrop;
+	var mc:FlxBackdrop;
+	var cloud1:FlxBackdrop;
+	var cloud2:FlxBackdrop;
 	//var bgMC:FlxSprite;
 
 	override function create()
@@ -100,14 +102,30 @@ class MainMenuState extends MusicBeatState
 		magenta.color = 0xFFfd719b;
 		add(magenta);
 		
-		wall = new FlxBackdrop(Paths.image('UI_Wall_Background'), 5, 1, true, true);
-		wall.setPosition(0, 750);
-		wall.updateHitbox();
-		wall.antialiasing = ClientPrefs.globalAntialiasing;
-		add(wall);
-
+		mc = new FlxBackdrop(Paths.image('UI_World'), 5, 1, true, true);
+		mc.setPosition(0, 750);
+		mc.updateHitbox();
+		mc.antialiasing = ClientPrefs.globalAntialiasing;
+		add(mc);
 		
+		cloud1 = new FlxBackdrop(Paths.image('Cloud1'), 3, 1, true, true);
+		cloud1.setPosition(0, 750);
+		cloud1.updateHitbox();
+		cloud1.antialiasing = ClientPrefs.globalAntialiasing;
+		add(cloud1);
+		
+		cloud2 = new FlxBackdrop(Paths.image('Cloud2'), 4, 1, true, true);
+		cloud2.setPosition(0, 750);
+		cloud2.updateHitbox();
+		cloud2.antialiasing = ClientPrefs.globalAntialiasing;
+		add(cloud2);
+
 		// magenta.scrollFactor.set();
+		
+		camFollow = new FlxObject(0, 0, 1, 1);
+		camFollowPos = new FlxObject(0, 0, 1, 1);
+		add(camFollow);
+		add(camFollowPos);
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
@@ -191,9 +209,11 @@ class MainMenuState extends MusicBeatState
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
 		}
 		
-		wall.x = FlxMath.lerp(wall.x, wall.x - 10, CoolUtil.boundTo(elapsed * 9, 0, 1));
+		mc.x = FlxMath.lerp(mc.x, mc.x - 10, CoolUtil.boundTo(elapsed * 9, 0, 1));
+		cloud1.x = FlxMath.lerp(cloud1.x, cloud1.x - 10, CoolUtil.boundTo(elapsed * 5, 0, 1));
+		cloud2.x = FlxMath.lerp(cloud2.x, cloud2.x - 10, CoolUtil.boundTo(elapsed * 3, 0, 1));
 
-		var lerpVal:Float = CoolUtil.boundTo(elapsed * 7.5, 0, 1);
+		var lerpVal:Float = CoolUtil.boundTo(elapsed * 5.6, 0, 1);
 		camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
 
 		if (!selectedSomethin)
