@@ -8,6 +8,7 @@ import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxCamera;
 import flixel.addons.transition.FlxTransitionableState;
+import flixel.addons.display.FlxBackdrop;
 import flixel.effects.FlxFlicker;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup.FlxTypedGroup;
@@ -49,6 +50,7 @@ class MainMenuState extends MusicBeatState
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
+	var bgMC:FlxBackdrop;
 	var bgMC:FlxSprite;
 
 	override function create()
@@ -98,12 +100,13 @@ class MainMenuState extends MusicBeatState
 		magenta.color = 0xFFfd719b;
 		add(magenta);
 		
-		bgMC = new FlxSprite(-80).loadGraphic(Paths.image('menuMC'));
-		bgMC.setGraphicSize(Std.int(bgMC.width * 1.175));
+		bgMC = new FlxBackdrop(Paths.image('UI_bgMC_Background'), 5, 1, true, true);
+		bgMC.setGraphicSize(Std.int(bgMC.width * 1.564));
 		bgMC.updateHitbox();
 		bgMC.screenCenter();
 		bgMC.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bgMC);
+
 		
 		// magenta.scrollFactor.set();
 
@@ -188,6 +191,8 @@ class MainMenuState extends MusicBeatState
 		{
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
 		}
+		
+		bgMC.x = FlxMath.lerp(bgMC.x, bgMC.x - 10, CoolUtil.boundTo(elapsed * 9, 0, 1));
 
 		var lerpVal:Float = CoolUtil.boundTo(elapsed * 7.5, 0, 1);
 		camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));

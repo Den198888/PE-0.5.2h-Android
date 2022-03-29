@@ -1,5 +1,7 @@
 package;
 
+import flixel.math.FlxRandom;
+import BlendModeEffect.BlendModeShader;
 import flixel.graphics.FlxGraphic;
 #if desktop
 import Discord.DiscordClient;
@@ -25,6 +27,8 @@ import flixel.graphics.atlas.FlxAtlas;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
+import flixel.effects.particles.FlxEmitter;
+import flixel.util.FlxTimer;
 import flixel.math.FlxPoint;
 import flixel.math.FlxRect;
 import flixel.system.FlxSound;
@@ -219,6 +223,9 @@ class PlayState extends MusicBeatState
 	var grpLimoParticles:FlxTypedGroup<BGSprite>;
 	var grpLimoDancers:FlxTypedGroup<BackgroundDancer>;
 	var fastCar:BGSprite;
+	
+	var emitter:FlxEmitter;
+	var emitter2:FlxEmitter;
 
 	var upperBoppers:BGSprite;
 	var bottomBoppers:BGSprite;
@@ -437,6 +444,46 @@ class PlayState extends MusicBeatState
 
 		switch (curStage)
 		{
+			case 'scott':
+				for (i in 0...6)
+				{
+					//first time using emitters sorry if i broke an unspeakable rule or something YES ziffy you did you idiot
+					//hi ziffy hi fabs
+					// hi guys i can say Nigger
+					//thanks clow
+					//wow really a "RACISMS" and a "MANIPULATIONS" moment clowfoe
+					//den19888 omfg WHY THE HELL YOU PUT THIS TO THE CODES YOU HAVE you are an idiot
+					emitter = new FlxEmitter(-2080.5, 1532.4);
+					emitter.launchMode = FlxEmitterMode.SQUARE;
+					emitter.velocity.set(-50, -400, 50, -800, -100, 0, 100, -800);
+					emitter.scale.set(4, 4, 4, 4, 0, 0, 0, 0);
+					emitter.drag.set(0, 0, 0, 0, 5, 5, 10, 10);
+					emitter.width = 4787.45;
+					emitter.alpha.set(1, 1);
+					emitter.lifespan.set(2, 2.5);
+					emitter.loadParticles(Paths.image('mods/Scott Cawthon(Afton Week)/images/scott/ember1'), 500, 16, true);
+						
+					emitter.start(false, FlxG.random.float(0.3, 0.4), 100000);
+					add(emitter);
+				}	
+
+				for (i in 0...6)
+				{
+					//first time using emitters sorry if i broke an unspeakable rule or something YES ziffy you did you idiot
+					emitter2 = new FlxEmitter(-2080.5, 1532.4);
+					emitter2.launchMode = FlxEmitterMode.SQUARE;
+					emitter2.velocity.set(-50, -300, 50, -700, -100, 0, 100, -700);
+					emitter2.scale.set(4, 4, 4, 4, 0, 0, 0, 0);
+					emitter2.drag.set(0, 0, 0, 0, 5, 5, 10, 10);
+					emitter2.width = 4787.45;
+					emitter2.alpha.set(1, 1);
+					emitter2.lifespan.set(2, 2.5);
+					emitter2.loadParticles(Paths.image('mods/Scott Cawthon(Afton Week)/images/scott/ember2'), 500, 16, true);
+						
+					emitter2.start(false, FlxG.random.float(0.4, 0.5), 100000);
+					add(emitter2);
+				}	
+
 			case 'stage': //Week 1
 				var bg:BGSprite = new BGSprite('stageback', -600, -200, 0.9, 0.9);
 				add(bg);
@@ -2508,6 +2555,8 @@ class PlayState extends MusicBeatState
 		
 		if (dad.curCharacter == "TDoll" || dad.curCharacter == "pico") // Do you really wanna see sonic.exe fly? Me neither.
 		{
+		    if (tailscircle == '')
+				dad.y += Math.sin(floaty) * 0;
 			if (tailscircle == 'hovering' || tailscircle == 'circling')
 				dad.y += Math.sin(floaty) * 1.3;
 			if (tailscircle == 'circling')
@@ -4401,12 +4450,6 @@ class PlayState extends MusicBeatState
 				tailscircle = 'hovering'; //why the funk you dont STOP omfg
 			if (curStep == 128 || curStep == 319 || curStep == 866)
 				tailscircle = 'circling';
-			if (curStep == 128)
-			    ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
-			    add(ezTrail);
-			if (curStep == 860)
-			    ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04); //FREAK ADD PLS IDK WHY YOU DONT ADD THIS
-                add(ezTrail);
 			if (curStep == 1120)
 			    remove(ezTrail);
 			if (curStep == 256 || curStep == 575) // this is to return tails to it's original positions (me very smart B))
@@ -4462,6 +4505,7 @@ class PlayState extends MusicBeatState
 				healthBar.visible = true;
 				iconP1.visible = true;
 				iconP2.visible = true;
+				tailscircle = 'circling';
 				scoreTxt.visible = true;
 				ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
 				add(ezTrail);
