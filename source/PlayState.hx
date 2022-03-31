@@ -512,7 +512,6 @@ class PlayState extends MusicBeatState
 						
 				emitterSpring2.start(false, FlxG.random.float(0.3, 0.4), 100000);
              }
-
 			case 'stage': //Week 1
 				var bg:BGSprite = new BGSprite('stageback', -600, -200, 0.9, 0.9);
 				add(bg);
