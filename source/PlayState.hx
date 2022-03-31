@@ -2590,10 +2590,8 @@ class PlayState extends MusicBeatState
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
 		// FlxG.watch.addQuick('VOLRight', vocals.amplitudeRight);
 		
-		if (dad.curCharacter == "TDoll" || dad.curCharacter == "pico") // Do you really wanna see sonic.exe fly? Me neither.
+		if (dad.curCharacter == 'TDoll') // Do you really wanna see sonic.exe fly? Me neither.
 		{
-		    if (tailscircle == '')
-				dad.y += Math.sin(floaty) * 0;
 			if (tailscircle == 'hovering' || tailscircle == 'circling')
 				dad.y += Math.sin(floaty) * 1.3;
 			if (tailscircle == 'circling')
@@ -4481,8 +4479,6 @@ class PlayState extends MusicBeatState
 		
 		if (curSong == 'sunshine')
 		{
-		    if (curStep == 1)
-		        tailscircle = '';
 			if (curStep == 128 || curStep == 319 || curStep == 866)
 				tailscircle = 'circling';
 			if (curStep == 1120)
@@ -4516,12 +4512,11 @@ class PlayState extends MusicBeatState
 				scoreTxt.visible = false;
 				remove(ezTrail); //remove it you dum dum idk why u dont remove things
 				remove(dadGroup);
-				dadGroup.remove(dad);
+				dadGroup.remove(dadGroup);
 
                 dad = new Character(-150, 330, 'TDollAlt');
-		        startCharacterPos(dad, true);
-		        dadGroup.add(dad);
-		        add(dad);
+		        dadGroup.add(dadGroup);
+		        add(dadGroup);
 				playerStrums.forEach(function(spr:FlxSprite)
 				{
 					spr.alpha = 0;
@@ -4545,12 +4540,11 @@ class PlayState extends MusicBeatState
 				ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
 				add(ezTrail);
 				remove(dadGroup);
-				dadGroup.remove(dad);
+				dadGroup.remove(dadGroup);
 
                 dad = new Character(-150, 330, 'TDoll');
-		        startCharacterPos(dad, true);
-		        dadGroup.add(dad);
-		        add(dad);
+		        dadGroup.add(dadGroup);
+		        add(dadGroup);
 		        opponentStrums.forEach(function(spr:FlxSprite)
 				{
 					if (!FlxG.save.data.middlescroll)
