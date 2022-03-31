@@ -458,9 +458,7 @@ class PlayState extends MusicBeatState
 				emitterSpring.alpha.set(1, 1);
 				emitterSpring.lifespan.set(4, 4.5);
 				emitterSpring.loadParticles(Paths.image('frightember1'), 500, 16, true);
-						
 				emitterSpring.start(false, FlxG.random.float(0.3, 0.4), 100000);
-
 				emitterSpring2 = new FlxEmitter(-2080.5, 1532.4);
 				emitterSpring2.launchMode = FlxEmitterMode.SQUARE;
 				emitterSpring2.velocity.set(-50, -400, 50, -800, -100, 0, 100, -800);
@@ -470,9 +468,7 @@ class PlayState extends MusicBeatState
 				emitterSpring2.alpha.set(1, 1);
 				emitterSpring2.lifespan.set(4, 4.5);
 				emitterSpring2.loadParticles(Paths.image('frightember2'), 500, 16, true);
-						
 				emitterSpring2.start(false, FlxG.random.float(0.3, 0.4), 100000);
-              }
          }
 			case 'scott':
 				for (i in 0...6)
