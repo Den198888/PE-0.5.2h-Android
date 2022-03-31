@@ -472,7 +472,6 @@ class PlayState extends MusicBeatState
               }
           }
       }
-  }
 			case 'scott':
 				for (i in 0...6)
 				{
