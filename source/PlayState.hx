@@ -1,6 +1,7 @@
 package;
 
 import flixel.math.FlxRandom;
+import flixel.addons.display.FlxBackdrop;
 import BlendModeEffect.BlendModeShader;
 import flixel.graphics.FlxGraphic;
 #if desktop
