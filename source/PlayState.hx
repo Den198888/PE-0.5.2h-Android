@@ -472,8 +472,9 @@ class PlayState extends MusicBeatState
 				emitterSpring2.loadParticles(Paths.image('frightember2'), 500, 16, true);
 						
 				emitterSpring2.start(false, FlxG.random.float(0.3, 0.4), 100000);
-            }
-
+              }
+         }
+         
 			case 'scott':
 				for (i in 0...6)
 				{
