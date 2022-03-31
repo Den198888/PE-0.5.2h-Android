@@ -448,30 +448,6 @@ class PlayState extends MusicBeatState
 
 		switch (curStage)
 		{
-		    case 'frightAAABURN':
-				emitterSpring = new FlxEmitter(-2080.5, 1532.4);
-				emitterSpring.launchMode = FlxEmitterMode.SQUARE;
-				emitterSpring.velocity.set(-50, -400, 50, -800, -100, 0, 100, -800);
-				emitterSpring.scale.set(4, 4, 4, 4, 0, 0, 0, 0);
-				emitterSpring.drag.set(0, 0, 0, 0, 5, 5, 10, 10);
-				emitterSpring.width = 4787.45;
-				emitterSpring.alpha.set(1, 1);
-				emitterSpring.lifespan.set(4, 4.5);
-				emitterSpring.loadParticles(Paths.image('frightember1'), 500, 16, true);
-				emitterSpring.start(false, FlxG.random.float(0.3, 0.4), 100000);
-				emitterSpring2 = new FlxEmitter(-2080.5, 1532.4);
-				emitterSpring2.launchMode = FlxEmitterMode.SQUARE;
-				emitterSpring2.velocity.set(-50, -400, 50, -800, -100, 0, 100, -800);
-				emitterSpring2.scale.set(4, 4, 4, 4, 0, 0, 0, 0);
-				emitterSpring2.drag.set(0, 0, 0, 0, 5, 5, 10, 10);
-				emitterSpring2.width = 4787.45;
-				emitterSpring2.alpha.set(1, 1);
-				emitterSpring2.lifespan.set(4, 4.5);
-				emitterSpring2.loadParticles(Paths.image('frightember2'), 500, 16, true);
-				emitterSpring2.start(false, FlxG.random.float(0.3, 0.4), 100000);
-              }
-          }
-      }
 			case 'scott':
 				for (i in 0...6)
 				{
