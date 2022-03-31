@@ -228,8 +228,6 @@ class PlayState extends MusicBeatState
 	var emitter2:FlxEmitter;
 	var dust:FlxBackdrop;
 	var dustFG:FlxBackdrop;
-	var emitterSpring:FlxEmitter;
-	var emitterSpring2:FlxEmitter;
 
 	var upperBoppers:BGSprite;
 	var bottomBoppers:BGSprite;
@@ -762,8 +760,17 @@ class PlayState extends MusicBeatState
 		if(isPixelStage) {
 			introSoundsSuffix = '-pixel';
 		}
-			
-	    if(curStage == 'scott'){
+
+		add(gfGroup); //Needed for blammed lights
+
+		// Shitty layering but whatev it works LOL
+		if (curStage == 'limo')
+			add(limo);
+
+		add(dadGroup);
+		add(boyfriendGroup);
+		
+		if(curStage == 'scott'){
 			dust = new FlxBackdrop(Paths.image('dust'), 5.3, 5.3, true, true);
 			dust.setPosition(3.35, 25);
 			dust.antialiasing = true;
@@ -779,22 +786,9 @@ class PlayState extends MusicBeatState
 			dustFG.alpha = 0.5;
 			add(dustFG);
 		}
-
-		add(gfGroup); //Needed for blammed lights
-
-		// Shitty layering but whatev it works LOL
-		if (curStage == 'limo')
-			add(limo);
-
-		add(dadGroup);
-		add(boyfriendGroup);
 		
 		if(curStage == 'spooky') {
 			add(halloweenWhite);
-		}
-		if (curStage == 'frightAAABURN'){
-			add(emitterSpring);
-			add(emitterSpring2);
 		}
 
 		#if LUA_ALLOWED
