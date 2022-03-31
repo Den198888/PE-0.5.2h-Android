@@ -474,7 +474,6 @@ class PlayState extends MusicBeatState
 				emitterSpring2.start(false, FlxG.random.float(0.3, 0.4), 100000);
               }
          }
-         
 			case 'scott':
 				for (i in 0...6)
 				{
