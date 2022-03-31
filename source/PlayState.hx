@@ -226,6 +226,10 @@ class PlayState extends MusicBeatState
 	
 	var emitter:FlxEmitter;
 	var emitter2:FlxEmitter;
+	var dust:FlxBackdrop;
+	var dustFG:FlxBackdrop;
+	var emitterSpring:FlxEmitter;
+	var emitterSpring2:FlxEmitter;
 
 	var upperBoppers:BGSprite;
 	var bottomBoppers:BGSprite;
@@ -482,7 +486,32 @@ class PlayState extends MusicBeatState
 						
 					emitter2.start(false, FlxG.random.float(0.4, 0.5), 100000);
 					add(emitter2);
-				}	
+				}
+			case 'frightAAABURN':
+				emitterSpring = new FlxEmitter(-2080.5, 1532.4);
+				emitterSpring.launchMode = FlxEmitterMode.SQUARE;
+				emitterSpring.velocity.set(-50, -400, 50, -800, -100, 0, 100, -800);
+				emitterSpring.scale.set(4, 4, 4, 4, 0, 0, 0, 0);
+				emitterSpring.drag.set(0, 0, 0, 0, 5, 5, 10, 10);
+				emitterSpring.width = 4787.45;
+				emitterSpring.alpha.set(1, 1);
+				emitterSpring.lifespan.set(4, 4.5);
+				emitterSpring.loadParticles(Paths.image('frightember1'), 500, 16, true);
+						
+				emitterSpring.start(false, FlxG.random.float(0.3, 0.4), 100000);
+
+				emitterSpring2 = new FlxEmitter(-2080.5, 1532.4);
+				emitterSpring2.launchMode = FlxEmitterMode.SQUARE;
+				emitterSpring2.velocity.set(-50, -400, 50, -800, -100, 0, 100, -800);
+				emitterSpring2.scale.set(4, 4, 4, 4, 0, 0, 0, 0);
+				emitterSpring2.drag.set(0, 0, 0, 0, 5, 5, 10, 10);
+				emitterSpring2.width = 4787.45;
+				emitterSpring2.alpha.set(1, 1);
+				emitterSpring2.lifespan.set(4, 4.5);
+				emitterSpring2.loadParticles(Paths.image('frightember2'), 500, 16, true);
+						
+				emitterSpring2.start(false, FlxG.random.float(0.3, 0.4), 100000);
+             }
 
 			case 'stage': //Week 1
 				var bg:BGSprite = new BGSprite('stageback', -600, -200, 0.9, 0.9);
@@ -758,6 +787,23 @@ class PlayState extends MusicBeatState
 		if(isPixelStage) {
 			introSoundsSuffix = '-pixel';
 		}
+			
+	    if(curStage == 'scott'){
+			dust = new FlxBackdrop(Paths.image('dust'), 5.3, 5.3, true, true);
+			dust.setPosition(3.35, 25);
+			dust.antialiasing = true;
+			dust.updateHitbox();
+			dust.blend = BlendMode.ADD;
+			dust.alpha = 0.6;
+			add(dust);
+			dustFG = new FlxBackdrop(Paths.image('dustFG'), 6.4, 6.4, true, true);
+			dustFG.setPosition(-24.45, 17.6);
+			dustFG.antialiasing = true;
+			dustFG.updateHitbox();
+			dustFG.blend = BlendMode.ADD;
+			dustFG.alpha = 0.5;
+			add(dustFG);
+		}
 
 		add(gfGroup); //Needed for blammed lights
 
@@ -770,6 +816,10 @@ class PlayState extends MusicBeatState
 		
 		if(curStage == 'spooky') {
 			add(halloweenWhite);
+		}
+		if (curStage == 'frightAAABURN'){
+			add(emitterSpring);
+			add(emitterSpring2);
 		}
 
 		#if LUA_ALLOWED
@@ -2378,6 +2428,23 @@ class PlayState extends MusicBeatState
 
 		switch (curStage)
 		{
+		case 'scott':
+				for (i in 0...opponentStrums.length) {
+					opponentStrums.members[i].alpha = 0;
+				}
+				if(dust != null) {
+					dust.y = FlxMath.lerp(dust.y, dust.y + 17, CoolUtil.boundTo(elapsed * 9, 0, 1));
+					dust.x = FlxMath.lerp(dust.x, dust.x - 27, CoolUtil.boundTo(elapsed * 9, 0, 1));
+				}
+
+				if(dustFG != null) {
+					dustFG.y = FlxMath.lerp(dustFG.y, dustFG.y + 29, CoolUtil.boundTo(elapsed * 9, 0, 1));
+					dustFG.x = FlxMath.lerp(dustFG.x, dustFG.x - 33, CoolUtil.boundTo(elapsed * 9, 0, 1));
+				}
+
+				dust.alpha = FlxMath.lerp(0.6, dust.alpha, CoolUtil.boundTo(1 - (elapsed * 3.125), 0, 1));
+				dustFG.alpha = FlxMath.lerp(0.5, dustFG.alpha, CoolUtil.boundTo(1 - (elapsed * 3.125), 0, 1));
+
 			case 'schoolEvil':
 				if(!ClientPrefs.lowQuality && bgGhouls.animation.curAnim.finished) {
 					bgGhouls.visible = false;
@@ -4626,6 +4693,12 @@ class PlayState extends MusicBeatState
 
 		switch (curStage)
 		{
+		case 'scott':
+				if(curBeat % 2 == 0) {
+					dustFG.alpha = 1;
+					dust.alpha = 1;
+				}
+				
 			case 'school':
 				if(!ClientPrefs.lowQuality) {
 					bgGirls.dance();
