@@ -51,8 +51,8 @@ class MainMenuState extends MusicBeatState
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
 	var mc:FlxBackdrop;
-	var cloud1:FlxBackdrop;
-	var cloud2:FlxBackdrop;
+	var cave1:FlxBackdrop;
+	var cave2:FlxBackdrop;
 	//var bgMC:FlxSprite;
 
 	override function create()
@@ -78,9 +78,7 @@ class MainMenuState extends MusicBeatState
 
 		persistentUpdate = persistentDraw = true;
 
-		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), 0.1);
 		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
-		bg.scrollFactor.set(0, yScroll);
 		bg.setGraphicSize(Std.int(bg.width * 1.175));
 		bg.updateHitbox();
 		bg.screenCenter();
@@ -93,7 +91,6 @@ class MainMenuState extends MusicBeatState
 		add(camFollowPos);
 
 		magenta = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
-		magenta.scrollFactor.set(0, yScroll);
 		magenta.setGraphicSize(Std.int(magenta.width * 1.175));
 		magenta.updateHitbox();
 		magenta.screenCenter();
@@ -102,23 +99,26 @@ class MainMenuState extends MusicBeatState
 		magenta.color = 0xFFfd719b;
 		add(magenta);
 		
-		mc = new FlxBackdrop(Paths.image('UI_World'), 5, 1, true, true);
+		cave2 = new FlxBackdrop(Paths.image('cave2'), 5, 1, true, true);
+		cave2.setPosition(0, 750);
+		cave2.updateHitbox();
+		cave2.scrollFactor.set(0, 0);
+		cave2.antialiasing = false;
+		add(cave2);
+		
+		cave1 = new FlxBackdrop(Paths.image('cave1'), 3, 1, true, true);
+		cave1.setPosition(0, 750);
+		cave1.updateHitbox();
+		cave1.scrollFactor.set(0, 0);
+		cave1.antialiasing = false;
+		add(cave1);
+		
+		mc = new FlxBackdrop(Paths.image('UI_CaveMain'), 4, 1, true, true);
 		mc.setPosition(0, 750);
 		mc.updateHitbox();
-		mc.antialiasing = ClientPrefs.globalAntialiasing;
+		mc.scrollFactor.set(0, 0);
+		mc.antialiasing = false;
 		add(mc);
-		
-		cloud1 = new FlxBackdrop(Paths.image('Cloud1'), 3, 1, true, true);
-		cloud1.setPosition(0, 750);
-		cloud1.updateHitbox();
-		cloud1.antialiasing = ClientPrefs.globalAntialiasing;
-		add(cloud1);
-		
-		cloud2 = new FlxBackdrop(Paths.image('Cloud2'), 4, 1, true, true);
-		cloud2.setPosition(0, 750);
-		cloud2.updateHitbox();
-		cloud2.antialiasing = ClientPrefs.globalAntialiasing;
-		add(cloud2);
 
 		// magenta.scrollFactor.set();
 		
@@ -148,9 +148,9 @@ class MainMenuState extends MusicBeatState
 			menuItem.ID = i;
 			menuItem.screenCenter(X);
 			menuItems.add(menuItem);
-			var scr:Float = (optionShit.length - 4) * 0.135;
-			if(optionShit.length < 6) scr = 0;
-			menuItem.scrollFactor.set(0, scr);
+			//var scr:Float = (optionShit.length - 4) * 0.135;
+			//if(optionShit.length < 6) scr = 0;
+			//menuItem.scrollFactor.set(0, scr);
 			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
 			//menuItem.setGraphicSize(Std.int(menuItem.width * 0.58));
 			menuItem.updateHitbox();
@@ -209,9 +209,9 @@ class MainMenuState extends MusicBeatState
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
 		}
 		
-		mc.x = FlxMath.lerp(mc.x, mc.x - 10, CoolUtil.boundTo(elapsed * 9, 0, 1));
-		cloud1.x = FlxMath.lerp(cloud1.x, cloud1.x - 10, CoolUtil.boundTo(elapsed * 5, 0, 1));
-		cloud2.x = FlxMath.lerp(cloud2.x, cloud2.x - 10, CoolUtil.boundTo(elapsed * 3, 0, 1));
+		mc.x = FlxMath.lerp(mc.x, mc.x - 10, CoolUtil.boundTo(elapsed * 9, 0, 0.6));
+		cave1.x = FlxMath.lerp(cave1.x, cave1.x - 10, CoolUtil.boundTo(elapsed * 5, 0, 1));
+		cave2.x = FlxMath.lerp(cave2.x, cave2.x - 10, CoolUtil.boundTo(elapsed * 3, 0, 1.1));
 
 		var lerpVal:Float = CoolUtil.boundTo(elapsed * 5.6, 0, 1);
 		camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
