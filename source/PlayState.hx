@@ -245,11 +245,12 @@ class PlayState extends MusicBeatState
 	public var scoreTxt:FlxText;
 	var timeTxt:FlxText;
 	var scoreTxtTween:FlxTween;
-	var floaty:Float = 0;
-	var tailscircle:String = '';
 	var ezTrail:FlxTrail;
 	var camX:Int = 0;
 	var camY:Int = 0;
+	
+	var floaty:Float = 0;
+	var tailscircle:String = '';
 
 	public static var campaignScore:Int = 0;
 	public static var campaignMisses:Int = 0;
@@ -2590,9 +2591,9 @@ class PlayState extends MusicBeatState
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
 		// FlxG.watch.addQuick('VOLRight', vocals.amplitudeRight);
 		
-		if (dad.curCharacter == 'TDoll') // Do you really wanna see sonic.exe fly? Me neither.
+		if (dad.curCharacter == "TDoll") // Do you really wanna see sonic.exe fly? Me neither bruh
 		{
-			if (tailscircle == 'hovering' || tailscircle == 'circling')
+			if (tailscircle == 'hovering' && tailscircle == 'circling')
 				dad.y += Math.sin(floaty) * 1.3;
 			if (tailscircle == 'circling')
 				dad.x += Math.cos(floaty) * 1.3; // math B)
@@ -2826,7 +2827,7 @@ class PlayState extends MusicBeatState
 					}
 				}
 				
-				if (!daNote.mustPress && daNote.wasGoodHit)
+				if (!daNote.mustPress || daNote.wasGoodHit)
 				{
 					if (tailscircle == 'circling' && dad.curCharacter == 'TDoll')
 					{
@@ -2835,15 +2836,14 @@ class PlayState extends MusicBeatState
 
 					if (curSong == 'sunshine' && curStep > 588 && curStep < 860 && !daNote.isSustainNote)
 					{
-						playerStrums.forEach(function(spr:FlxSprite)
-						{
-							spr.alpha = 0.7;
-							if (spr.alpha != 0)
+						for (i in 0...playerStrums.length) {
+					          playerStrums.members[i].alpha = 0;
+							if (playerStrums.members[i].alpha != 0)
 							{
 								new FlxTimer().start(0.01, function(trol:FlxTimer)
 								{
-									spr.alpha -= 0.03;
-									if (spr.alpha != 0)
+									playerStrums.members[i].alpha = 0.03;
+									if (playerStrums.members[i].alpha != 0)
 										trol.reset();
 								});
 							}
@@ -4479,6 +4479,8 @@ class PlayState extends MusicBeatState
 		
 		if (curSong == 'sunshine')
 		{
+		    if (curStep == 64)
+				tailscircle = 'hovering';
 			if (curStep == 128 || curStep == 319 || curStep == 866)
 				tailscircle = 'circling';
 			if (curStep == 1120)
@@ -4512,11 +4514,11 @@ class PlayState extends MusicBeatState
 				scoreTxt.visible = false;
 				remove(ezTrail); //remove it you dum dum idk why u dont remove things
 				remove(dadGroup);
-				dadGroup.remove(dadGroup);
+				dadGroup.remove(dad);
 
                 dad = new Character(-150, 330, 'TDollAlt');
-		        dadGroup.add(dadGroup);
-		        add(dadGroup);
+		        dadGroup.add(dad);
+				add(dadGroup);
 				playerStrums.forEach(function(spr:FlxSprite)
 				{
 					spr.alpha = 0;
@@ -4540,11 +4542,10 @@ class PlayState extends MusicBeatState
 				ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
 				add(ezTrail);
 				remove(dadGroup);
-				dadGroup.remove(dadGroup);
-
+				dadGroup.remove(dad);
                 dad = new Character(-150, 330, 'TDoll');
-		        dadGroup.add(dadGroup);
-		        add(dadGroup);
+		        dadGroup.add(dad);
+				add(dadGroup);
 		        opponentStrums.forEach(function(spr:FlxSprite)
 				{
 					if (!FlxG.save.data.middlescroll)
@@ -4648,7 +4649,7 @@ class PlayState extends MusicBeatState
 		// Dad doesnt interupt his own notes
 		if (SONG.notes[Math.floor(curStep / 16)].mustHitSection && dad.curCharacter != 'gf')
 			{
-				if (tailscircle == 'circling' && dad.curCharacter == 'TDoll')
+				if (tailscircle == 'circling' && dad.curCharacter == 'TDoll' && dad.curCharacter != 'scott' && dad.curCharacter != 'matpat')
 					remove(ezTrail);
 				dad.dance();
 				camX = 0;
