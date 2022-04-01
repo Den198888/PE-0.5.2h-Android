@@ -23,6 +23,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
+import flixel.addons.display.FlxBackdrop;
 import Controls;
 
 using StringTools;
@@ -57,6 +58,9 @@ class OptionsState extends MusicBeatState
 
 	var selectorLeft:Alphabet;
 	var selectorRight:Alphabet;
+	
+	var cave:FlxBackdrop;
+	var dripss:FlxBackdrop;
 
 	override function create() {
 		#if desktop
@@ -70,6 +74,18 @@ class OptionsState extends MusicBeatState
 		bg.screenCenter();
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
+		
+		cave = new FlxBackdrop(Paths.image('Cave'), 1, 5, true, true);
+		cave.setPosition(0, 750);
+		cave.updateHitbox();
+		cave.antialiasing = ClientPrefs.globalAntialiasing;
+		add(cave);
+
+		dripss = new FlxBackdrop(Paths.image('Dripstone'), 1, 5, true, true);
+		dripss.setPosition(0, 750);
+		dripss.updateHitbox();
+		dripss.antialiasing = ClientPrefs.globalAntialiasing;
+		add(dripss);
 
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
@@ -104,6 +120,9 @@ class OptionsState extends MusicBeatState
 
 	override function update(elapsed:Float) {
 		super.update(elapsed);
+		
+		cave.y = FlxMath.lerp(cave.y, cave.y + 10, CoolUtil.boundTo(elapsed * 9, 0, 1));
+		dripss.y = FlxMath.lerp(dripss.y, dripss.y + 20, CoolUtil.boundTo(elapsed * 9, 0, 1));
 
 		if (controls.UI_UP_P) {
 			changeSelection(-1);
