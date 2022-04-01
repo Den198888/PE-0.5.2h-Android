@@ -2836,20 +2836,20 @@ class PlayState extends MusicBeatState
 
 					if (curSong == 'sunshine' && curStep > 588 && curStep < 860 && !daNote.isSustainNote)
 					{
-						for (i in 0...playerStrums.length) {
-					          playerStrums.members[i].alpha = 0;
-							if (playerStrums.members[i].alpha != 0)
+						playerStrums.forEach(function(spr:FlxSprite)
+						{
+							spr.alpha = 0.7;
+							if (spr.alpha != 0)
 							{
 								new FlxTimer().start(0.01, function(trol:FlxTimer)
 								{
-									playerStrums.members[i].alpha = 0.03;
-									if (playerStrums.members[i].alpha != 0)
+									spr.alpha -= 0.03;
+									if (spr.alpha != 0)
 										trol.reset();
 								});
 							}
-						}
+						});
 					}
-				}
 
 				// Kill extremely late notes and cause misses
 				if (Conductor.songPosition > noteKillOffset + daNote.strumTime)
@@ -2866,9 +2866,8 @@ class PlayState extends MusicBeatState
 					daNote.destroy();
 				}
 			}
-		  )
-	   ;
-   }
+	   }
+   );
 		checkEventNote();
 		
 		#if debug
