@@ -2867,7 +2867,7 @@ class PlayState extends MusicBeatState
 				}
 			}
 		  )
-	    };
+	    });
     );
 		checkEventNote();
 		
