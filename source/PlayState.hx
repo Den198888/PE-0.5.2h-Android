@@ -2848,7 +2848,7 @@ class PlayState extends MusicBeatState
 								});
 							}
 						}
-					});
+					}
 				}
 
 				// Kill extremely late notes and cause misses
