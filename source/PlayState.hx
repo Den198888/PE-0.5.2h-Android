@@ -2847,8 +2847,9 @@ class PlayState extends MusicBeatState
 										trol.reset();
 								});
 							}
-						});
-					}
+						}
+					});
+				}
 
 				// Kill extremely late notes and cause misses
 				if (Conductor.songPosition > noteKillOffset + daNote.strumTime)
