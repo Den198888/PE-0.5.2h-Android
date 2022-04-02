@@ -119,6 +119,44 @@ class MainMenuState extends MusicBeatState
 		mc.scrollFactor.set(0, 0);
 		mc.antialiasing = false;
 		add(mc);
+		
+		var gtLogo:FlxSprite = new FlxSprite(-520, monitor.y - 810).loadGraphic(Paths.image('Character_Portrait_GT_Logo'));
+		gtLogo.setGraphicSize(Std.int(gtLogo.width * 0.4));
+		gtLogo.visible = FlxG.save.data.matpatUnlocked;
+		gtLogo.antialiasing = true;
+		add(gtLogo);
+
+		var shadowPortrait:FlxSprite = new FlxSprite(-520, monitor.y - 810).loadGraphic(Paths.image('Character_Portrait_Shadow_Bonnie'));
+		shadowPortrait.setGraphicSize(Std.int(shadowPortrait.width * 0.4));
+		shadowPortrait.visible = FlxG.save.data.shadowBonnieUnlocked;
+		shadowPortrait.antialiasing = true;
+		add(shadowPortrait);
+
+		var springPortrait:FlxSprite = new FlxSprite(-520, monitor.y - 810).loadGraphic(Paths.image('Character_Portrait_Spring_Bonnie'));
+		springPortrait.setGraphicSize(Std.int(springPortrait.width * 0.4));
+		springPortrait.visible = FlxG.save.data.salvageBeaten;
+		springPortrait.antialiasing = true;
+		add(springPortrait);
+
+		var springtrapPortrait:FlxSprite = new FlxSprite(-520, monitor.y - 810).loadGraphic(Paths.image('Character_Portrait_Springtrap'));
+		springtrapPortrait.setGraphicSize(Std.int(springtrapPortrait.width * 0.4));
+		springtrapPortrait.visible = FlxG.save.data.nightmareBeaten;
+		springtrapPortrait.antialiasing = true;
+		add(springtrapPortrait);
+
+		var aftonPortrait:FlxSprite = new FlxSprite(-520, monitor.y - 810).loadGraphic(Paths.image('Character_Portrait_Afton'));
+		aftonPortrait.setGraphicSize(Std.int(aftonPortrait.width * 0.4));
+		aftonPortrait.visible = true;
+		aftonPortrait.antialiasing = true;
+		add(aftonPortrait);
+
+		//FlxMouseEventManager.add(aftonPortrait, function onMouseDown(aftonPortrait:FlxSprite){fazbarsPlay();}, null);
+
+		var scottPortrait:FlxSprite = new FlxSprite(-520, monitor.y - 810).loadGraphic(Paths.image('Character_Portrait_Scott'));
+		scottPortrait.setGraphicSize(Std.int(scottPortrait.width * 0.4));
+		scottPortrait.visible = FlxG.save.data.scottBeaten;
+		scottPortrait.antialiasing = true;
+		add(scottPortrait);
 
 		// magenta.scrollFactor.set();
 		
