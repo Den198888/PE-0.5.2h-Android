@@ -120,6 +120,11 @@ class MainMenuState extends MusicBeatState
 		mc.antialiasing = false;
 		add(mc);
 		
+		var monitor:FlxSprite = new FlxSprite(-100, 0).loadGraphic(Paths.image('UI_Monitor'));
+		monitor.setGraphicSize(Std.int(monitor.width * 1));
+		monitor.scrollFactor.set();
+		add(monitor);
+		
 		var gtLogo:FlxSprite = new FlxSprite(-520, monitor.y - 810).loadGraphic(Paths.image('Character_Portrait_GT_Logo'));
 		gtLogo.setGraphicSize(Std.int(gtLogo.width * 0.4));
 		gtLogo.visible = FlxG.save.data.matpatUnlocked;
