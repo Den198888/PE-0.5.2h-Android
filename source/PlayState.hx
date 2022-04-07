@@ -245,13 +245,6 @@ class PlayState extends MusicBeatState
 	public var scoreTxt:FlxText;
 	var timeTxt:FlxText;
 	var scoreTxtTween:FlxTween;
-	var ezTrail:FlxTrail;
-	var camX:Int = 0;
-	var camY:Int = 0;
-	
-	var floaty:Float = 0;
-	var tailscircle:String = '';
-	var isRing:Bool = SONG.isRing;
 
 	public static var campaignScore:Int = 0;
 	public static var campaignMisses:Int = 0;
@@ -304,9 +297,6 @@ class PlayState extends MusicBeatState
 		// for lua
 		instance = this;
 		
-		if (FlxG.save.data.fpsCap > 290)
-		    (cast(Lib.current.getChildAt(0), Main)).setFPSCap(800);
-
 		debugKeysChart = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 		debugKeysCharacter = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_2'));
 		PauseSubState.songName = null; //Reset to default
