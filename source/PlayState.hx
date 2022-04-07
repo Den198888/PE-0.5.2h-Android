@@ -4225,12 +4225,7 @@ class PlayState extends MusicBeatState
 						bfcamX = 15;
 						bfcamY = 0;
 					}
-					else
-					{
-						bfcamY = -15;
-						bfcamX = 0;
-					}
-
+					
 				case 1:
 					bfcamY = 15;
 					bfcamX = 0;
