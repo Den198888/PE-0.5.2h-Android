@@ -251,6 +251,7 @@ class PlayState extends MusicBeatState
 	
 	var floaty:Float = 0;
 	var tailscircle:String = '';
+	var isRing:Bool = SONG.isRing;
 
 	public static var campaignScore:Int = 0;
 	public static var campaignMisses:Int = 0;
@@ -302,6 +303,9 @@ class PlayState extends MusicBeatState
 
 		// for lua
 		instance = this;
+		
+		if (FlxG.save.data.fpsCap > 290)
+		    (cast(Lib.current.getChildAt(0), Main)).setFPSCap(800);
 
 		debugKeysChart = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 		debugKeysCharacter = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_2'));
@@ -1021,31 +1025,24 @@ class PlayState extends MusicBeatState
 				var vcr:VCRDistortionShader;
 				vcr = new VCRDistortionShader();
 
-				var daStatic:FlxSprite = new FlxSprite(0, 0);
+				camGame.setFilters([new ShaderFilter(vcr)]);
 
-				daStatic.frames = Paths.getSparrowAtlas('daSTAT');
-
-				daStatic.setGraphicSize(FlxG.width, FlxG.height);
-
-				daStatic.alpha = 0.05;
-
-				daStatic.screenCenter();
-
-				daStatic.cameras = [camHUD];
-
-				daStatic.animation.addByPrefix('static', 'staticFLASH', 24, true);
-
-				add(daStatic);
-
-				daStatic.animation.play('static');
+				camHUD.setFilters([new ShaderFilter(vcr)]);
+			}
+       else if (curSong == 'sunshine')
+		{
+			if (FlxG.save.data.vfx)
+			{
+				var vcr:VCRDistortionShader;
+				vcr = new VCRDistortionShader();
 
 				camGame.setFilters([new ShaderFilter(vcr)]);
 
 				camHUD.setFilters([new ShaderFilter(vcr)]);
 			}
 
-        }
-
+			FlxG.camera.follow(camFollow, LOCKON, 0.06 * (30 / (cast(Lib.current.getChildAt(0), Main)).getFPS()));
+		}
 		generateSong(SONG.song);
 		#if LUA_ALLOWED
 		for (notetype in noteTypeMap.keys())
@@ -1104,7 +1101,7 @@ class PlayState extends MusicBeatState
 			prevCamFollowPos = null;
 		}
 		add(camFollowPos);
-
+		
 		FlxG.camera.follow(camFollowPos, LOCKON, 1);
 		// FlxG.camera.setScrollBounds(0, FlxG.width, 0, FlxG.height);
 		FlxG.camera.zoom = defaultCamZoom;
@@ -2583,20 +2580,12 @@ class PlayState extends MusicBeatState
 
 		if (FlxG.keys.anyJustPressed(debugKeysChart) && !endingSong && !inCutscene)
 		{
-			//openChartEditor();
+			openChartEditor();
 		}
-		
-		floaty += 0.03;
 
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
 		// FlxG.watch.addQuick('VOLRight', vocals.amplitudeRight);
-		
-		if (dad.curCharacter == "TDoll") // Do you really wanna see sonic.exe fly? Me neither bruh
-		{
-			if (tailscircle == 'hovering' && tailscircle == 'circling')
-				dad.y += Math.sin(floaty) * 1.3;
-			if (tailscircle == 'circling')
-				dad.x += Math.cos(floaty) * 1.3; // math B)
+
 		}
 		var mult:Float = FlxMath.lerp(1, iconP1.scale.x, CoolUtil.boundTo(1 - (elapsed * 9), 0, 1));
 		iconP1.scale.set(mult, mult);
@@ -2827,30 +2816,6 @@ class PlayState extends MusicBeatState
 					}
 				}
 				
-				if (!daNote.mustPress || daNote.wasGoodHit)
-				{
-					if (tailscircle == 'circling' && dad.curCharacter == 'TDoll')
-					{
-						add(ezTrail);
-					}
-
-					if (curSong == 'sunshine' && curStep > 588 && curStep < 860 && !daNote.isSustainNote)
-					{
-						playerStrums.forEach(function(spr:FlxSprite)
-						{
-							spr.alpha = 0.7;
-							if (spr.alpha != 0)
-							{
-								new FlxTimer().start(0.01, function(trol:FlxTimer)
-								{
-									spr.alpha -= 0.03;
-									if (spr.alpha != 0)
-										trol.reset();
-								});
-							}
-						});
-					}
-
 				// Kill extremely late notes and cause misses
 				if (Conductor.songPosition > noteKillOffset + daNote.strumTime)
 				{
@@ -3479,7 +3444,7 @@ class PlayState extends MusicBeatState
 
 			if (chartingMode)
 			{
-				//openChartEditor();
+				openChartEditor();
 				return;
 			}
 
@@ -3936,6 +3901,7 @@ class PlayState extends MusicBeatState
 		// HOLDING
 		var up = controls.NOTE_UP;
 		var right = controls.NOTE_RIGHT;
+		var up = controls.NOTE_UP;
 		var down = controls.NOTE_DOWN;
 		var left = controls.NOTE_LEFT;
 		var controlHoldArray:Array<Bool> = [left, down, up, right];
@@ -4478,97 +4444,6 @@ class PlayState extends MusicBeatState
 			resyncVocals();
 		}
 		
-		if (curSong == 'sunshine')
-		{
-		    if (curStep == 64)
-				tailscircle = 'hovering';
-			if (curStep == 128 || curStep == 319 || curStep == 866)
-				tailscircle = 'circling';
-			if (curStep == 1120)
-			    remove(ezTrail);
-			if (curStep == 256 || curStep == 575) // this is to return tails to it's original positions (me very smart B))
-			{
-				FlxTween.tween(dad, {x: -150, y: 330}, 0.2, {
-					onComplete: function(twn:FlxTween)
-					{
-						dad.setPosition(-150, 330);
-					}
-				});
-			}
-			if (curStep == 588) // kill me 588
-			{
-			    opponentStrums.forEach(function(spr:FlxSprite)
-				{
-					spr.alpha = 0;
-				});
-				playerStrums.forEach(function(spr:FlxSprite)
-				{
-					if (!FlxG.save.data.middlescroll)
-						spr.x -= 275;
-				});
-				boyfriend.alpha = 0;
-				healthBarBG.visible = false;
-				healthBar.visible = false;
-				botplayTxt.visible = false;
-				iconP1.visible = false;
-				iconP2.visible = false;
-				scoreTxt.visible = false;
-				remove(ezTrail); //remove it you dum dum idk why u dont remove things
-				remove(dadGroup);
-				dadGroup.remove(dad);
-
-                dad = new Character(-150, 330, 'TDollAlt');
-		        dadGroup.add(dad);
-				add(dadGroup);
-				playerStrums.forEach(function(spr:FlxSprite)
-				{
-					spr.alpha = 0;
-				});
-			}
-			if (curStep == 860) // kill me
-			{
-				playerStrums.forEach(function(spr:FlxSprite)
-				{
-					if (!FlxG.save.data.middlescroll)
-						spr.x += 275;
-				});
-				boyfriend.alpha = 1;
-				botplayTxt.visible = true;
-				healthBarBG.visible = true;
-				healthBar.visible = true;
-				iconP1.visible = true;
-				iconP2.visible = true;
-				tailscircle = 'circling';
-				scoreTxt.visible = true;
-				ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
-				add(ezTrail);
-				remove(dadGroup);
-				dadGroup.remove(dad);
-                dad = new Character(-150, 330, 'TDoll');
-		        dadGroup.add(dad);
-				add(dadGroup);
-		        opponentStrums.forEach(function(spr:FlxSprite)
-				{
-					if (!FlxG.save.data.middlescroll)
-						spr.alpha = 1;
-				});
-				playerStrums.forEach(function(spr:FlxSprite)
-				{
-					spr.alpha = 1;
-				});
-			}
-			if (curStep == 1120)
-			{
-				FlxTween.tween(dad, {x: -150, y: 330}, 0.2, {
-					onComplete: function(twn:FlxTween)
-					{
-						dad.setPosition(-150, 330);
-						remove(ezTrail);
-					}
-				});
-			}
-		}
-
 		if(curStep == lastStepHit) {
 			return;
 		}
@@ -4647,16 +4522,7 @@ class PlayState extends MusicBeatState
 		{
 			dad.dance();
 		}
-		// Dad doesnt interupt his own notes
-		if (SONG.notes[Math.floor(curStep / 16)].mustHitSection && dad.curCharacter != 'gf')
-			{
-				if (tailscircle == 'circling' && dad.curCharacter == 'TDoll' && dad.curCharacter != 'scott' && dad.curCharacter != 'matpat')
-					remove(ezTrail);
-				dad.dance();
-				camX = 0;
-				camY = 0;
-		}
-
+	
 		switch (curStage)
 		{
 		case 'scott':
