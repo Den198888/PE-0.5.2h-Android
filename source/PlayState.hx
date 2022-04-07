@@ -1017,19 +1017,8 @@ class PlayState extends MusicBeatState
 		playerStrums = new FlxTypedGroup<StrumNote>();
 
 		// startCountdown();
-		
-		if(Paths.formatToSongPath(SONG.song) == 'fourth-wall')
-		{
-			if (FlxG.save.data.vfx)
-			{
-				var vcr:VCRDistortionShader;
-				vcr = new VCRDistortionShader();
-
-				camGame.setFilters([new ShaderFilter(vcr)]);
-
-				camHUD.setFilters([new ShaderFilter(vcr)]);
-			}
-       else if (curSong == 'sunshine')
+	
+    if (curSong == 'sunshine')
 		{
 			if (FlxG.save.data.vfx)
 			{
