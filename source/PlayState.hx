@@ -229,6 +229,9 @@ class PlayState extends MusicBeatState
 	var emitter2:FlxEmitter;
 	var dust:FlxBackdrop;
 	var dustFG:FlxBackdrop;
+	
+	var bfcamX:Int = 0;
+	var bfcamY:Int = 0;
 
 	var upperBoppers:BGSprite;
 	var bottomBoppers:BGSprite;
@@ -1020,7 +1023,7 @@ class PlayState extends MusicBeatState
 				camHUD.setFilters([new ShaderFilter(vcr)]);
 			}
 
-			FlxG.camera.follow(camFollow, LOCKON, 0.06);
+			FlxG.camera.follow(camFollowPos, LOCKON, 0.06);
 		}
 		generateSong(SONG.song);
 		#if LUA_ALLOWED
@@ -3923,6 +3926,16 @@ class PlayState extends MusicBeatState
 				//boyfriend.animation.curAnim.finish();
 			}
 		}
+		
+		if (boyfriend.holdTimer > Conductor.stepCrochet * 4 * 0.001 && (!holdArray.contains(true) || PlayStateChangeables.botPlay))
+		{
+			if (boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.animation.curAnim.name.endsWith('miss'))
+			{
+				boyfriend.playAnim('idle');
+				bfcamX = 0; // real.
+				bfcamY = 0;
+			}
+		}
 
 		// TO DO: Find a better way to handle controller inputs, this should work for now
 		if(ClientPrefs.controllerMode)
@@ -4027,7 +4040,8 @@ class PlayState extends MusicBeatState
 			vocals.volume = 0;
 		}
 	}
-
+	
+	
 	function opponentNoteHit(note:Note):Void
 	{
 		if (Paths.formatToSongPath(SONG.song) != 'tutorial')
@@ -4189,8 +4203,44 @@ class PlayState extends MusicBeatState
 				note.destroy();
 			}
 		}
-	}
-	
+		
+		switch (note.noteData)
+			{
+				case 4:
+					if (isRing)
+					{
+						bfcamX = 15;
+						bfcamY = 0;
+					}
+
+				case 2:
+					if (!isRing)
+					{
+						bfcamY = -15;
+						bfcamX = 0;
+					}
+
+				case 3:
+					{
+						bfcamX = 15;
+						bfcamY = 0;
+					}
+					else
+					{
+						bfcamY = -15;
+						bfcamX = 0;
+					}
+
+				case 1:
+					bfcamY = 15;
+					bfcamX = 0;
+				case 0:
+					bfcamX = -15;
+					bfcamY = 0;
+			}
+	   }
+  }
+  
 	function spawnNoteSplashOnNote(note:Note) {
 		if(ClientPrefs.noteSplashes && note != null) {
 			var strum:StrumNote = playerStrums.members[note.noteData];
