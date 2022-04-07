@@ -4207,14 +4207,12 @@ class PlayState extends MusicBeatState
 		switch (note.noteData)
 			{
 				case 4:
-					if (isRing)
 					{
 						bfcamX = 15;
 						bfcamY = 0;
 					}
 
 				case 2:
-					if (!isRing)
 					{
 						bfcamY = -15;
 						bfcamX = 0;
@@ -4233,9 +4231,7 @@ class PlayState extends MusicBeatState
 					bfcamX = -15;
 					bfcamY = 0;
 			}
-	   }
-  }
-  
+     }  
 	function spawnNoteSplashOnNote(note:Note) {
 		if(ClientPrefs.noteSplashes && note != null) {
 			var strum:StrumNote = playerStrums.members[note.noteData];
