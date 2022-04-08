@@ -2583,10 +2583,11 @@ class PlayState extends MusicBeatState
 		if (dad.curCharacter == "Tdoll") // Do you really wanna see sonic.exe fly? Me neither.
 		{
 			if (tailscircle == 'hovering' || tailscircle == 'circling')
-				//kill
+				//k do thing
 			if (tailscircle == 'circling')
-				//kys
+				//k do thing
 		}
+		
 		var mult:Float = FlxMath.lerp(1, iconP1.scale.x, CoolUtil.boundTo(1 - (elapsed * 9), 0, 1));
 		iconP1.scale.set(mult, mult);
 		iconP1.updateHitbox();
