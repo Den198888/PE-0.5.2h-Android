@@ -232,6 +232,8 @@ class PlayState extends MusicBeatState
 	
 	var bfcamX:Int = 0;
 	var bfcamY:Int = 0;
+	
+	var ezTrail:FlxTrail; //shit
 
 	var upperBoppers:BGSprite;
 	var bottomBoppers:BGSprite;
