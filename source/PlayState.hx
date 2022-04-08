@@ -2380,9 +2380,10 @@ class PlayState extends MusicBeatState
 		if (curSong == 'sunshine' && dad.animation.curAnim.name.startsWith('idle') && dad.stunned)
 			{
 				remove(ezTrail);
-			}
-		}
-
+				ezTrail.kill();
+			  }
+		   }
+        }
 		switch (curStage)
 		{
 		case 'scott':
