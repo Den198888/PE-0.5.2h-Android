@@ -2370,14 +2370,7 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
-		/*if (FlxG.keys.justPressed.NINE)
-		{
-			iconP1.swapOldIcon();
-		}*/
-
-		callOnLuas('onUpdate', [elapsed]);
-		
-		if (curSong == 'sunshine' && dad.animation.curAnim.name.startsWith('idle') && dad.stunned)
+	       if (curSong == 'sunshine' && dad.animation.curAnim.name.startsWith('idle') && dad.stunned && dad.curCharacter == 'Tdoll')
 			{
 				remove(ezTrail);
 				ezTrail.kill();
@@ -2385,6 +2378,13 @@ class PlayState extends MusicBeatState
 		   }
         }
         
+		/*if (FlxG.keys.justPressed.NINE)
+		{
+			iconP1.swapOldIcon();
+		}*/
+
+		callOnLuas('onUpdate', [elapsed]);
+		
 		switch (curStage)
 		{
 		case 'scott':
