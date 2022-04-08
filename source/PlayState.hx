@@ -230,6 +230,9 @@ class PlayState extends MusicBeatState
 	var dust:FlxBackdrop;
 	var dustFG:FlxBackdrop;
 	
+	var camX:Int = 0;
+	var camY:Int = 0;
+	
 	var bfcamX:Int = 0;
 	var bfcamY:Int = 0;
 	
@@ -1018,6 +1021,8 @@ class PlayState extends MusicBeatState
 	
     if (curSong == 'sunshine')
 		{
+		    ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
+		
 			if (FlxG.save.data.vfx)
 			{
 				var vcr:VCRDistortionShader;
@@ -2383,13 +2388,6 @@ class PlayState extends MusicBeatState
 		
 		switch (curStage)
 		{
-		case 'TDStage':
-		     if (tailscircle == 'circling' && dad.animation.curAnim.name == 'idle' && dad.curCharacter == 'Tdoll')
-			{
-				remove(ezTrail);
-				//ezTrail.kill(); pls help
-		 }
-        
 		case 'scott':
 				for (i in 0...opponentStrums.length) {
 					opponentStrums.members[i].alpha = 0;
@@ -4556,6 +4554,15 @@ class PlayState extends MusicBeatState
 			// Conductor.changeBPM(SONG.bpm);
 		}
 		
+		// Dad doesnt interupt his own notes
+			if (SONG.notes[Math.floor(curStep / 16)].mustHitSection && dad.curCharacter != 'gf')
+			{
+				if (tailscircle == 'circling' && dad.curCharacter == 'Tdoll')
+					remove(ezTrail);
+				camX = 0;
+				camY = 0;
+			}
+		}
 		// FlxG.log.add('change bpm' + SONG.notes[Std.int(curStep / 16)].changeBPM);
 
 		if (generatedMusic && PlayState.SONG.notes[Std.int(curStep / 16)] != null && !endingSong && !isCameraOnForcedPos)
