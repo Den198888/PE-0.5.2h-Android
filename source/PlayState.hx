@@ -235,6 +235,9 @@ class PlayState extends MusicBeatState
 	
 	var ezTrail:FlxTrail; //shit
 
+    var floaty:Float = 0;
+	var tailscircle:String = '';
+
 	var upperBoppers:BGSprite;
 	var bottomBoppers:BGSprite;
 	var santa:BGSprite;
@@ -2381,10 +2384,10 @@ class PlayState extends MusicBeatState
 		switch (curStage)
 		{
 		case 'TDStage':
-		     if (dad.animation.curAnim.name == 'idle' && dad.curCharacter == 'Tdoll')
+		     if (tailscircle == 'circling' && dad.animation.curAnim.name == 'idle' && dad.curCharacter == 'Tdoll')
 			{
 				remove(ezTrail);
-				//ezTrail.kill();
+				ezTrail.kill(); //pls help
 		 }
         
 		case 'scott':
@@ -2577,6 +2580,13 @@ class PlayState extends MusicBeatState
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
 		// FlxG.watch.addQuick('VOLRight', vocals.amplitudeRight);
 		
+		if (dad.curCharacter == "Tdoll") // Do you really wanna see sonic.exe fly? Me neither.
+		{
+			if (tailscircle == 'hovering' || tailscircle == 'circling')
+				//kill
+			if (tailscircle == 'circling')
+				//kys
+		}
 		var mult:Float = FlxMath.lerp(1, iconP1.scale.x, CoolUtil.boundTo(1 - (elapsed * 9), 0, 1));
 		iconP1.scale.set(mult, mult);
 		iconP1.updateHitbox();
@@ -2808,7 +2818,7 @@ class PlayState extends MusicBeatState
 				
 				if (!daNote.mustPress && daNote.wasGoodHit)
 				{
-					if (curSong == 'sunshine' && curStep > 128 && curStep < 588 || curStep > 860 && curStep < 1120 && dad.curCharacter == 'Tdoll')
+					if (tailscircle == 'circling' && dad.curCharacter == 'Tdoll')
 					{
 					    var ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
 						add(ezTrail);
@@ -4481,6 +4491,22 @@ class PlayState extends MusicBeatState
 		{
 			resyncVocals();
 		}
+		
+	    if (curSong == 'sunshine')
+		{
+			if (curStep == 64)
+				tailscircle = 'hovering';
+			if (curStep == 128 || curStep == 319 || curStep == 866)
+				tailscircle = 'circling';
+			if (curStep == 256 || curStep == 575)
+				tailscircle = 'hovering';
+			if (curStep == 588)
+			    tailscircle = '';
+			    ezTrail.kill();
+			    remove(ezTrail);
+			if (curStep == 1120)
+			    tailscircle = '';
+		  }
 		
 		if(curStep == lastStepHit) {
 			return;
