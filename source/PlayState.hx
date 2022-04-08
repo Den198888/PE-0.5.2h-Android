@@ -2369,15 +2369,7 @@ class PlayState extends MusicBeatState
 	var limoSpeed:Float = 0;
 
 	override public function update(elapsed:Float)
-	{
-	       if (curSong == 'sunshine' && dad.animation.curAnim.name.startsWith('idle') && dad.stunned && dad.curCharacter == 'Tdoll')
-			{
-				remove(ezTrail);
-				ezTrail.kill();
-			  }
-		   }
-        }
-        
+	{    
 		/*if (FlxG.keys.justPressed.NINE)
 		{
 			iconP1.swapOldIcon();
@@ -2387,6 +2379,13 @@ class PlayState extends MusicBeatState
 		
 		switch (curStage)
 		{
+		case 'TDStage':
+		     if (dad.animation.curAnim.name.startsWith('idle') && dad.stunned && dad.curCharacter == 'Tdoll')
+			{
+				remove(ezTrail);
+				//ezTrail.kill();
+		 }
+        
 		case 'scott':
 				for (i in 0...opponentStrums.length) {
 					opponentStrums.members[i].alpha = 0;
