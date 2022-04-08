@@ -232,7 +232,6 @@ class PlayState extends MusicBeatState
 	
 	var bfcamX:Int = 0;
 	var bfcamY:Int = 0;
-	var ezTrail:FlxTrail;
 
 	var upperBoppers:BGSprite;
 	var bottomBoppers:BGSprite;
@@ -2380,7 +2379,7 @@ class PlayState extends MusicBeatState
 		switch (curStage)
 		{
 		case 'TDStage':
-		     if (dad.animation.curAnim.name.startsWith('idle') && dad.stunned && dad.curCharacter == 'Tdoll')
+		     if (dad.animation.curAnim.name == 'idle' && dad.curCharacter == 'Tdoll')
 			{
 				remove(ezTrail);
 				//ezTrail.kill();
@@ -2766,14 +2765,6 @@ class PlayState extends MusicBeatState
 				{
 					opponentNoteHit(daNote);
 				}
-				
-				if (!daNote.mustPress && daNote.wasGoodHit)
-				{
-					if (curSong == 'sunshine' && curStep > 128 && curStep < 588 && curStep > 860 && curStep < 1120 && dad.curCharacter == 'TDoll')
-					{
-					    var ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
-						add(ezTrail);
-				}
 
 				if(daNote.mustPress && cpuControlled) {
 					if(daNote.isSustainNote) {
@@ -2811,6 +2802,14 @@ class PlayState extends MusicBeatState
 							daNote.clipRect = swagRect;
 						}
 					}
+				}
+				
+				if (!daNote.mustPress && daNote.wasGoodHit)
+				{
+					if (curSong == 'sunshine' && curStep > 128 && curStep < 588 || curStep > 860 && curStep < 1120 && dad.curCharacter == 'Tdoll')
+					{
+					    var ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
+						add(ezTrail);
 				}
 				
 				// Kill extremely late notes and cause misses
