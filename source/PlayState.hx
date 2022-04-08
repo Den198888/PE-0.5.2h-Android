@@ -4594,7 +4594,8 @@ class PlayState extends MusicBeatState
 				camY = 0;
 			}
 		}
-	
+		
+		}
 		switch (curStage)
 		{
 		case 'scott':
