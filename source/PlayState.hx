@@ -2387,7 +2387,7 @@ class PlayState extends MusicBeatState
 		     if (tailscircle == 'circling' && dad.animation.curAnim.name == 'idle' && dad.curCharacter == 'Tdoll')
 			{
 				remove(ezTrail);
-				ezTrail.kill(); //pls help
+				//ezTrail.kill(); pls help
 		 }
         
 		case 'scott':
@@ -4503,7 +4503,6 @@ class PlayState extends MusicBeatState
 				tailscircle = 'hovering';
 			if (curStep == 588)
 			    tailscircle = '';
-			    ezTrail.kill();
 			    remove(ezTrail);
 			if (curStep == 1120)
 			    tailscircle = '';
