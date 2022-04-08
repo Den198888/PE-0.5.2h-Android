@@ -2819,7 +2819,6 @@ class PlayState extends MusicBeatState
 				{
 					if (tailscircle == 'circling' && dad.curCharacter == 'Tdoll')
 					{
-					    ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
 						add(ezTrail);
 				}
 				
