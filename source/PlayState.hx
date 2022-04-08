@@ -4555,6 +4555,14 @@ class PlayState extends MusicBeatState
 		}
 		
 		// FlxG.log.add('change bpm' + SONG.notes[Std.int(curStep / 16)].changeBPM);
+	   // Dad doesnt interupt his own notes
+		if (SONG.notes[Math.floor(curStep / 16)].mustHitSection && dad.curCharacter != 'gf')
+			{
+				if (tailscircle == 'circling' && dad.curCharacter == 'Tdoll')
+					remove(ezTrail);
+				camX = 0;
+				camY = 0;
+		}
 		
 		if (generatedMusic && PlayState.SONG.notes[Std.int(curStep / 16)] != null && !endingSong && !isCameraOnForcedPos)
 		{
@@ -4650,16 +4658,6 @@ class PlayState extends MusicBeatState
 		callOnLuas('onBeatHit', []);
 	}
 	// Dad doesnt interupt his own notes
-    }
-	if (SONG.notes[Math.floor(curStep / 16)].mustHitSection && dad.curCharacter != 'gf')
-			{
-				if (tailscircle == 'circling' && dad.curCharacter == 'Tdoll')
-					remove(ezTrail);
-				camX = 0;
-				camY = 0;
-			}
-		}
-    }
     
 	public var closeLuas:Array<FunkinLua> = [];
 	public function callOnLuas(event:String, args:Array<Dynamic>):Dynamic {
