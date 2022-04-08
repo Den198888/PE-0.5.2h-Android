@@ -4565,15 +4565,6 @@ class PlayState extends MusicBeatState
 			FlxG.camera.zoom += 0.015;
 			camHUD.zoom += 0.03;
 		}
-		// Dad doesnt interupt his own notes
-		if (SONG.notes[Math.floor(curStep / 16)].mustHitSection && dad.curCharacter != 'gf')
-			{
-				if (tailscircle == 'circling' && dad.curCharacter == 'Tdoll')
-					remove(ezTrail);
-				camX = 0;
-				camY = 0;
-			}
-		}
 
 		iconP1.scale.set(1.2, 1.2);
 		iconP2.scale.set(1.2, 1.2);
@@ -4658,7 +4649,17 @@ class PlayState extends MusicBeatState
 		setOnLuas('curBeat', curBeat); //DAWGG?????
 		callOnLuas('onBeatHit', []);
 	}
-
+	// Dad doesnt interupt his own notes
+	if (SONG.notes[Math.floor(curStep / 16)].mustHitSection && dad.curCharacter != 'gf')
+			{
+				if (tailscircle == 'circling' && dad.curCharacter == 'Tdoll')
+					remove(ezTrail);
+				camX = 0;
+				camY = 0;
+			}
+		}
+    }
+    
 	public var closeLuas:Array<FunkinLua> = [];
 	public function callOnLuas(event:String, args:Array<Dynamic>):Dynamic {
 		var returnVal:Dynamic = FunkinLua.Function_Continue;
