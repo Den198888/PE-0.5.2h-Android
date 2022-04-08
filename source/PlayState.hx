@@ -232,6 +232,7 @@ class PlayState extends MusicBeatState
 	
 	var bfcamX:Int = 0;
 	var bfcamY:Int = 0;
+	var ezTrail:FlxTrail;
 
 	var upperBoppers:BGSprite;
 	var bottomBoppers:BGSprite;
@@ -2375,6 +2376,12 @@ class PlayState extends MusicBeatState
 		}*/
 
 		callOnLuas('onUpdate', [elapsed]);
+		
+		if (curSong == 'sunshine' && dad.animation.curAnim.name.startsWith('idle') && dad.stunned)
+			{
+				remove(ezTrail);
+			}
+		}
 
 		switch (curStage)
 		{
@@ -2757,6 +2764,14 @@ class PlayState extends MusicBeatState
 				if (!daNote.mustPress && daNote.wasGoodHit && !daNote.hitByOpponent && !daNote.ignoreNote)
 				{
 					opponentNoteHit(daNote);
+				}
+				
+				if (!daNote.mustPress && daNote.wasGoodHit)
+				{
+					if (curSong == 'sunshine' && curStep > 128 && curStep < 588 && curStep > 860 && curStep < 1120 && dad.curCharacter == 'TDoll')
+					{
+					    var ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
+						add(ezTrail);
 				}
 
 				if(daNote.mustPress && cpuControlled) {
