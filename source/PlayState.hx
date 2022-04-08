@@ -4554,19 +4554,8 @@ class PlayState extends MusicBeatState
 			// Conductor.changeBPM(SONG.bpm);
 		}
 		
-		// Dad doesnt interupt his own notes
-			if (SONG.notes[Math.floor(curStep / 16)].mustHitSection && dad.curCharacter != 'gf')
-			{
-				if (tailscircle == 'circling' && dad.curCharacter == 'Tdoll')
-					remove(ezTrail);
-				camX = 0;
-				camY = 0;
-			}
-		}
 		// FlxG.log.add('change bpm' + SONG.notes[Std.int(curStep / 16)].changeBPM);
 		
-        }
-        
 		if (generatedMusic && PlayState.SONG.notes[Std.int(curStep / 16)] != null && !endingSong && !isCameraOnForcedPos)
 		{
 			moveCameraSection(Std.int(curStep / 16));
@@ -4594,6 +4583,16 @@ class PlayState extends MusicBeatState
 		if (curBeat % dad.danceEveryNumBeats == 0 && dad.animation.curAnim != null && !dad.animation.curAnim.name.startsWith('sing') && !dad.stunned)
 		{
 			dad.dance();
+		}
+		
+		// Dad doesnt interupt his own notes
+			if (SONG.notes[Math.floor(curStep / 16)].mustHitSection && dad.curCharacter != 'gf')
+			{
+				if (tailscircle == 'circling' && dad.curCharacter == 'Tdoll')
+					remove(ezTrail);
+				camX = 0;
+				camY = 0;
+			}
 		}
 	
 		switch (curStage)
