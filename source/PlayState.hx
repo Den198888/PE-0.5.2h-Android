@@ -4650,6 +4650,7 @@ class PlayState extends MusicBeatState
 		callOnLuas('onBeatHit', []);
 	}
 	// Dad doesnt interupt his own notes
+    }
 	if (SONG.notes[Math.floor(curStep / 16)].mustHitSection && dad.curCharacter != 'gf')
 			{
 				if (tailscircle == 'circling' && dad.curCharacter == 'Tdoll')
