@@ -938,6 +938,9 @@ class PlayState extends MusicBeatState
 			case 'schoolEvil':
 				var evilTrail = new FlxTrail(dad, null, 4, 24, 0.3, 0.069); //nice
 				insert(members.indexOf(dadGroup) - 1, evilTrail);
+			
+			case 'TDStage':
+		         var ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
 		}
 
 		var file:String = Paths.json(songName + '/dialogue'); //Checks for json/Psych Engine dialogue
@@ -4597,10 +4600,6 @@ class PlayState extends MusicBeatState
 		
 		switch (curStage)
 		{
-		case 'TDStage':
-		        var ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
-		       }
-		
 		case 'scott':
 				if(curBeat % 2 == 0) {
 					dustFG.alpha = 1;
