@@ -940,7 +940,7 @@ class PlayState extends MusicBeatState
 				insert(members.indexOf(dadGroup) - 1, evilTrail);
 			
 			case 'TDStage':
-		         var ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
+		         ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
 		}
 
 		var file:String = Paths.json(songName + '/dialogue'); //Checks for json/Psych Engine dialogue
@@ -1024,7 +1024,7 @@ class PlayState extends MusicBeatState
 	
     if (curSong == 'sunshine')
 		{
-		    var ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
+		    ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
 		
 			if (FlxG.save.data.vfx)
 			{
@@ -4492,7 +4492,7 @@ class PlayState extends MusicBeatState
 		{
 			resyncVocals();
 		}
-		
+	switch (curSong)
 	    if (curSong == 'sunshine')
 		{
 			if (curStep == 64)
@@ -4505,7 +4505,8 @@ class PlayState extends MusicBeatState
 			    tailscircle = '';
 			    remove(ezTrail);
 			if (curStep == 866)
-			    var ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
+			    tailscircle = 'circling';
+			    ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
 			if (curStep == 1120)
 			    tailscircle = '';
 			    remove(ezTrail);
@@ -4565,6 +4566,7 @@ class PlayState extends MusicBeatState
 			{
 				if (tailscircle == 'circling' && dad.curCharacter == 'Tdoll')
 					remove(ezTrail);
+					dad.dance();
 				camX = 0;
 				camY = 0;
 		}
