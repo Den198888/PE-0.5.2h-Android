@@ -1021,7 +1021,7 @@ class PlayState extends MusicBeatState
 	
     if (curSong == 'sunshine')
 		{
-		    ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
+		    var ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
 		
 			if (FlxG.save.data.vfx)
 			{
@@ -4494,15 +4494,18 @@ class PlayState extends MusicBeatState
 		{
 			if (curStep == 64)
 				tailscircle = 'hovering';
-			if (curStep == 128 || curStep == 319 || curStep == 866)
+			if (curStep == 128 || curStep == 319)
 				tailscircle = 'circling';
 			if (curStep == 256 || curStep == 575)
 				tailscircle = 'hovering';
 			if (curStep == 588)
 			    tailscircle = '';
 			    remove(ezTrail);
+			if (curStep == 866)
+			    var ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
 			if (curStep == 1120)
 			    tailscircle = '';
+			    remove(ezTrail);
 		  }
 		
 		if(curStep == lastStepHit) {
@@ -4594,6 +4597,10 @@ class PlayState extends MusicBeatState
 		
 		switch (curStage)
 		{
+		case 'TDStage':
+		        var ezTrail = new FlxTrail(dad, null, 2, 5, 0.3, 0.04);
+		       }
+		
 		case 'scott':
 				if(curBeat % 2 == 0) {
 					dustFG.alpha = 1;
