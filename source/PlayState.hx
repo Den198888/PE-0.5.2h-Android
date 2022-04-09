@@ -4493,6 +4493,8 @@ class PlayState extends MusicBeatState
 			resyncVocals();
 		}
 	switch (curSong)
+	    {
+	
 	    if (curSong == 'sunshine')
 		{
 			if (curStep == 64)
